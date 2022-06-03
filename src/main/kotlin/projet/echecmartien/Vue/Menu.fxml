@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="470.0" fitWidth="715.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@357485-Mars-space-universe-artwork-planet-space_art.jpg" />
+         </image>
+      </ImageView>
+      <BorderPane layoutY="-2.0" prefHeight="400.0" prefWidth="715.0">
+         <right>
+            <VBox prefHeight="404.0" prefWidth="208.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="128.0" text="Nouvelle Partie" textAlignment="CENTER">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="Charger Partie" textAlignment="CENTER">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="128.0" text="Règles du Jeu" textAlignment="CENTER">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </right>
+         <top>
+            <Label prefHeight="89.0" prefWidth="183.0" text="Echec Martiens" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </top></BorderPane>
+   </children>
+</Pane>
