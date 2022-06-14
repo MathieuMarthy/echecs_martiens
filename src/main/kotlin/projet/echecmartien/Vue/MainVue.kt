@@ -25,6 +25,7 @@ class MainVue: AnchorPane() {
     var astro = ImageView(AppliJeuEchecMartien::class.java.getResource("style/astro2.gif").toExternalForm())
     var dog = ImageView(AppliJeuEchecMartien::class.java.getResource("style/dog.gif").toExternalForm())
     var planet = ImageView(AppliJeuEchecMartien::class.java.getResource("style/planet.gif").toExternalForm())
+    //var musique = Media(AppliJeuEchecMartien::class.java.getResource("").toExternalForm())
 
 
 

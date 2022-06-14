@@ -1,0 +1,14 @@
+.fond {
+ -fx-background-image: url("bg.png");
+ -fx-background-size:150%;
+ -fx-background-position: center;
+ -fx-background-repeat:  no-repeat
+
+}
+
+.titre .text{
+-fx-font-size:120px;
+-fx-stroke: purple;
+-fx-stroke-width: 6px;
+-fx-font-weight: 700;
+}
