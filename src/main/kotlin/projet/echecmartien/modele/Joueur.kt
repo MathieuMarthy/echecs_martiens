@@ -48,4 +48,8 @@ class Joueur(private var pseudo: String) {
         return sum
     }
 
+    fun setPionsCaptures(pions: MutableSet<Pion>) {
+        this.pionsCaptures = pions
+    }
+
 }

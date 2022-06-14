@@ -35,4 +35,13 @@ class Case {
     fun setPion(pion: Pion?) {
         this.pion = pion
     }
+
+    override fun toString(): String {
+        return when(this.pion) {
+            is MoyenPion -> "M"
+            is GrandPion -> "G"
+            is PetitPion -> "P"
+            else -> "."
+        }
+    }
 }

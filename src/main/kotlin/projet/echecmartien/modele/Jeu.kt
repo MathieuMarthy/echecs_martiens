@@ -1,5 +1,12 @@
 package projet.echecmartien.modele
 
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileReader
+import java.io.FileWriter
+
 
 public class Jeu(): InterfaceJeu {
 
@@ -16,6 +23,9 @@ public class Jeu(): InterfaceJeu {
     private var statut: Boolean = false
     private var nombreCoupsSansPriseMax = 5
     private var nombreCoupsSansPrise = 0
+
+    // utile
+    private var path = System.getProperty("user.dir") + "/Sauvegardes"
 
     /**
      * getter
@@ -198,4 +208,116 @@ public class Jeu(): InterfaceJeu {
      * fonction utile pour les tests
      */
     fun getPlateau(): Plateau = this.plateau
+
+    fun sauvegarderPartie(nomSauvegarde: String) {
+
+        // création du json
+        var string_json = "{"
+
+        // sauvegarde des joueurs
+        for (i in 0 until this.joueurs.size) {
+            string_json += """"joueur${i + 1}_pseudo":"${this.joueurs[i].getPseudo()}""""
+
+            var string_pions_joueur = ""
+            for (pion in this.joueurs[i].getPionsCaptures()) {
+                string_pions_joueur += when (pion) {
+                    is MoyenPion -> "M"
+                    is GrandPion -> "G"
+                    else -> "P"
+                }
+            }
+            string_json += ""","joueur${i + 1}_pions": "$string_pions_joueur","""
+        }
+
+        // sauvegarde joueur courant
+        string_json += """"joueur_courant":"${this.joueurCourant.getPseudo()}""""
+
+        // plateau
+        string_json += ""","plateau":""""
+        var arrivedezone = ""
+        for ((i, ligne) in this.plateau.getCases().withIndex()) {
+            for ((j, case) in ligne.withIndex()) {
+                if (case.getPion() == this.pionArriveDeZone) {
+                    arrivedezone = "$i,$j"
+                }
+                string_json += case.toString()
+            }
+        }
+
+        // arrive de zone
+        string_json += """","arrivedezone":"$arrivedezone"}"""
+        val file = FileWriter("$path/$nomSauvegarde.json")
+        /*Gson().toJson(string_json, file)*/
+        file.write(string_json)
+        file.flush()
+        file.close()
+    }
+
+    fun chargerPartie(nomSauvegarde: String) {
+        // vérification si le fichier existe
+        val file = File("$path/$nomSauvegarde.json")
+        if (!file.exists()) {
+            throw FileNotFoundException("Le fichier de sauvegarde n'existe pas")
+        }
+
+        // récupération des données
+        val reader = FileReader("$path/$nomSauvegarde.json")
+        val json = Gson().fromJson(reader, JsonObject::class.java)
+
+        // -- Plateau
+        // création de matrice vide
+        val tempPlateau = Array(this.plateau.getTailleVerticale()) { Array(this.plateau.getTailleHorizontale()) { Case() } }
+
+        // remplisage de la matrice
+        for ((i, ligne) in tempPlateau.withIndex()) {
+            for ((j, case) in ligne.withIndex()) {
+                val pion = when(json["plateau"].asString[i * 4 + j].toString()) {
+                    "M" -> MoyenPion()
+                    "G" -> GrandPion()
+                    "P" -> PetitPion()
+                    else -> null
+                }
+                tempPlateau[i][j].setPion(pion)
+            }
+        }
+        this.plateau.setMatrice(tempPlateau)
+
+        // -- arrive de zone
+        val x_y = json["arrivedezone"].asString.split(",")
+        this.pionArriveDeZone = this.plateau.getCases()[x_y[0].toInt()][x_y[1].toInt()].getPion()
+
+        // -- joueurs
+        val p1 = Joueur(json["joueur1_pseudo"].asString)
+        val p2 = Joueur(json["joueur2_pseudo"].asString)
+
+        for ((i, p) in listOf(p1, p2).withIndex()) {
+            val pions = json["joueur${i + 1}_pions"].asString
+            val captures = mutableSetOf<Pion>()
+            for (pion in pions) {
+                captures.add(when(pion.toString()) {
+                    "M" -> MoyenPion()
+                    "G" -> GrandPion()
+                    else -> PetitPion()
+                })
+            }
+            p.setPionsCaptures(captures)
+        }
+        this.joueurs = mutableListOf(p1, p2)
+
+        // -- joueur courant
+        val courant = json["joueur_courant"].asString
+        this.joueurCourant = this.joueurs[if (p1.getPseudo() == courant) 0 else 1]
+
+        println("-- courant")
+        println(this.joueurCourant.getPseudo())
+        println("-- plateau")
+        println(this.plateau.toString())
+        println("-- captures")
+        for (p in this.joueurs) {
+            println(p.getPseudo())
+            println(p.getPionsCaptures())
+        }
+
+    }
+
 }
