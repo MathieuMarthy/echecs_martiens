@@ -4,7 +4,13 @@ module projet.echecmartien {
     requires kotlin.stdlib;
 
     requires org.controlsfx.controls;
+    requires com.google.gson;
 
     opens projet.echecmartien to javafx.fxml;
     exports projet.echecmartien;
+
+
+    opens projet.echecmartien.modele to com.google.gson;
+    exports projet.echecmartien.modele;
+
 }

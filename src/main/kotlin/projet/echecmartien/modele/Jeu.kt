@@ -1,7 +1,7 @@
 package projet.echecmartien.modele
 
 
-class Jeu(): InterfaceJeu {
+public class Jeu(): InterfaceJeu {
 
     // UML
     private var plateau: Plateau = Plateau()
@@ -111,7 +111,6 @@ class Jeu(): InterfaceJeu {
         }
 
         return false
-
     }
 
     override fun deplacementPossible(coordOrigineX: Int, coordOrigineY: Int, coordDestinationX: Int, coordDestinationY: Int, joueur: Joueur?): Boolean {
@@ -145,6 +144,14 @@ class Jeu(): InterfaceJeu {
         }
 
         return depart.getJoueur() == joueur
+    }
+
+    fun tousLesCoupsPossibles(coordOrigineX: Int, coordOrigineY: Int){
+        for (b in 0 until this.plateau.getTailleVerticale()) {
+            for (a in 0 until this.plateau.getTailleHorizontale()) {
+                print("")
+            }
+        }
     }
 
     override fun deplacer(coordOrigineY: Int, coordOrigineX: Int, coordDestinationY: Int, coordDestinationX: Int) {

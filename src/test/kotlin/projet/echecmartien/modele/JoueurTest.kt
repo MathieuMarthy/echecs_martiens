@@ -8,7 +8,7 @@ internal class JoueurTest {
 
     @Test
     fun getPseudo() {
-        val pseudo = "Tonikaku kawaii c'est trop bien"
+        val pseudo = "Tonikaku kawaii c'est trop nul !!!"
         val p1 = Joueur(pseudo)
         assertEquals(pseudo, p1.getPseudo())
     }
