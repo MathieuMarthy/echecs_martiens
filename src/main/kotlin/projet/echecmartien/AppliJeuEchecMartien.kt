@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCombination
 import javafx.stage.Screen
 
 import javafx.stage.Stage
+import projet.echecmartien.Vue.Charger
 import projet.echecmartien.Vue.GrilleJeu
 import projet.echecmartien.Vue.MainVue
 
@@ -15,16 +16,17 @@ class AppliJeuEchecMartien: Application() {
         //Initialisation des variables
         val vue = MainVue()
         val grille = GrilleJeu()
+        val charger =  Charger()
 
         //Récupération des dimensions de l'écran & mise en plein écran de la scène
         val largeur = Screen.getPrimary().bounds.width
         val longueur = Screen.getPrimary().bounds.height
-        val scene = Scene(vue, largeur, longueur)
+        val scene = Scene(charger, largeur, longueur)
         primaryStage.isFullScreen = true
 
         //Ajout du style
         scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
-        vue.addStyle()
+        charger.addStyle()
 
         //Mise en place de la scène
         primaryStage.title="Echecs Martiens"
