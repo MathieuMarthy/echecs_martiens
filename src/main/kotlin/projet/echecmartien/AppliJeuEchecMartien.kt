@@ -6,17 +6,19 @@ import javafx.scene.input.KeyCombination
 import javafx.stage.Screen
 
 import javafx.stage.Stage
+import projet.echecmartien.Vue.GrilleJeu
 import projet.echecmartien.Vue.MainVue
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
 
         //Initialisation des variables
-        var vue = MainVue()
+        val vue = MainVue()
+        val grille = GrilleJeu()
 
         //Récupération des dimensions de l'écran & mise en plein écran de la scène
-        var largeur = Screen.getPrimary().bounds.width
-        var longueur = Screen.getPrimary().bounds.height
+        val largeur = Screen.getPrimary().bounds.width
+        val longueur = Screen.getPrimary().bounds.height
         val scene = Scene(vue, largeur, longueur)
         primaryStage.isFullScreen = true
 
