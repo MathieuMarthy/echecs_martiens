@@ -27,13 +27,14 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.isFullScreen = true
 
         //Création des scènes
-        val sceneMenu = Scene(grille, largeur, longueur)
+        val sceneMenu = Scene(vue, largeur, longueur)
 
         //Ajout du style
         sceneMenu.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
         nombreJoueurs.addStyle()
         vue.addStyle()
         charger.addStyle()
+        grille.addStyle()
 
         //Controleurs
 

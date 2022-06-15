@@ -21,9 +21,9 @@ GrilleJeu : BorderPane(){
     var couleur2 : String = "#A5BECC"
     var nuance2 : String = "#243A73"
 
-
+    val bandeauHaut = HBox()
     val grilleGauche = GridPane()
-
+    var grilleDroite = GridPane()
 
     val gauche = VBox()
     val droite = VBox()
@@ -49,20 +49,20 @@ GrilleJeu : BorderPane(){
         //Création du damier
         for (nbLignes in 0 until 8){
             for (nbColonnes in 0 until 4){
-                val case = Rectangle(100.0,100.0)
+                val case = Rectangle(120.0,120.0)
                 if (nbLignes <=3){
                     if ((nbColonnes+nbLignes)%2==1){
-                        case.style = "-fx-fill: $couleur1; -fx-stroke: black; -fx-stroke-width: 3;";
+                        case.style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
                     }else{
-                        case.style = "-fx-fill: $nuance1; -fx-stroke: black; -fx-stroke-width: 3;";
+                        case.style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
                     }
                     grille.add(case,nbColonnes,nbLignes)
                 }
                 else{
                     if ((nbColonnes+nbLignes)%2==1){
-                        case.style = "-fx-fill: $couleur2; -fx-stroke: black; -fx-stroke-width: 3;";
+                        case.style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
                     }else{
-                        case.style = "-fx-fill: $nuance2; -fx-stroke: black; -fx-stroke-width: 3;";
+                        case.style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
                     }
                     grille.add(case,nbColonnes,nbLignes)
                 }
@@ -70,15 +70,13 @@ GrilleJeu : BorderPane(){
         }
 
         //Positionnement
-        grille.vgap = 5.0
-        grille.hgap = 5.0
         this.center = grille
         grille.alignment = Pos.CENTER
 
         //Zone de gauche
         var rayon : Double = 30.0
         for (i in 0 until 3){
-            var pionModele = Circle(rayon)
+            val pionModele = Circle(rayon)
             grilleGauche.add(pionModele,0,i)
             rayon+=10.0
         }
@@ -92,8 +90,6 @@ GrilleJeu : BorderPane(){
         gauche.children.addAll(joueur1,grilleGauche)
 
         //Zone de droite
-        var grilleDroite = GridPane()
-
         grilleDroite.add(Label("x$nbPetitJ2"),0,0)
         grilleDroite.add(Label("x$nbMoyenJ2"),0,1)
         grilleDroite.add(Label("x$nbGrandJ2"),0,2)
@@ -110,12 +106,18 @@ GrilleJeu : BorderPane(){
 
         droite.children.addAll(joueur2,grilleDroite)
 
-        var centreGrille1 = ColumnConstraints()
-        centreGrille1.halignment = HPos.CENTER
+        //Centrage des grid
+        for (i in 0 until 6){
+            GridPane.setHalignment(grilleDroite.children[i],HPos.CENTER)
+            GridPane.setHalignment(grilleGauche.children[i],HPos.CENTER)
+        }
 
-        grilleGauche.columnConstraints.addAll(centreGrille1)
-        grilleDroite.columnConstraints.addAll(centreGrille1)
 
+        bandeauHaut.children.addAll(quitter,regles,ff)
+        this.top = bandeauHaut
+    }
 
+    fun addStyle(){
+        this.styleClass.add("grille")
     }
 }
