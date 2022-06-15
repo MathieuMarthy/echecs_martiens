@@ -5,11 +5,23 @@
  -fx-background-repeat:  no-repeat;
 }
 
+.fond2 {
+ -fx-background-image: url("ag.png");
+ -fx-background-size:150%;
+ -fx-background-position: center;
+ -fx-background-repeat:  no-repeat;
+}
+
 .titre .text{
 -fx-font-size:120px;
 -fx-stroke: purple;
 -fx-stroke-width: 6px;
 -fx-font-weight: 700;
+}
+
+.text1 .text{
+-fx-stroke: purple;
+-fx-fill: white;
 }
 
 .boutons .button{
@@ -45,10 +57,27 @@
 -fx-text-decoration:none;
 
 }
-.boutons2 .button .text{
+.boutons2 .button{
 	-fx-stroke: purple;
     -fx-stroke-width: 2px;
+}
 
+.boutons3 .button{
+-fx-background:linear-gradient(to bottom, #dfbdfa 5%, #bc80ea 100%);
+-fx-background-color:rgba(176, 115, 222, 0.8);
+-fx-border-radius:11px;
+-fx-cursor:pointer;
+-fx-text-fill:white;
+-fx-font-family:Arial;
+-fx-font-size:50px;
+-fx-font-weight:bold;
+-fx-padding:15px 100px;
+-fx-text-decoration:none;
+
+}
+.boutons3 .button{
+	-fx-stroke: purple;
+    -fx-stroke-width: 2px;
 }
 
 .grille{
@@ -57,6 +86,21 @@
  -fx-background-position: center;
  -fx-background-repeat:  no-repeat;
 }
+
+.text-field{
+   -fx-font-family: "Quicksand";
+   -fx-font-size: 25;
+   -fx-padding: 1,1,1,1;
+   -fx-border-color: pink;
+   -fx-border-width: 2;
+   -fx-border-radius: 1;
+   -fx-border: gone;
+   -fx-background-color: white;
+}
+
+
+
+
 
 .boutonsGrille .button{
 -fx-background:linear-gradient(to bottom, #dfbdfa 5%, #bc80ea 100%);
