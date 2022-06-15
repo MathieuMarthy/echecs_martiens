@@ -7,10 +7,8 @@ import javafx.scene.input.KeyCombination
 import javafx.stage.Screen
 
 import javafx.stage.Stage
-import projet.echecmartien.Vue.Charger
+import projet.echecmartien.Vue.*
 import projet.echecmartien.Vue.GrilleJeu
-import projet.echecmartien.Vue.MainVue
-import projet.echecmartien.Vue.NombreJoueurs
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -20,6 +18,9 @@ class AppliJeuEchecMartien: Application() {
         val grille = GrilleJeu()
         val charger =  Charger()
         var nombreJoueurs = NombreJoueurs()
+        val MenuPerso1 = MenuPerso1()
+        val MenuPerso2 = MenuPerso1()
+
 
         //Récupération des dimensions de l'écran & mise en plein écran de la scène
         val largeur = Screen.getPrimary().bounds.width
@@ -27,13 +28,14 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.isFullScreen = true
 
         //Création des scènes
-        val sceneMenu = Scene(grille, largeur, longueur)
+        val sceneMenu = Scene(vue, largeur, longueur)
 
         //Ajout du style
         sceneMenu.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
         nombreJoueurs.addStyle()
         vue.addStyle()
         charger.addStyle()
+        grille.addStyle()
 
         //Controleurs
 
@@ -46,6 +48,9 @@ class AppliJeuEchecMartien: Application() {
         vue.boutonLoad.onAction = EventHandler{ primaryStage.scene.root = charger }
         //Retour (Charger partie)
         charger.nouveau5.onAction = EventHandler{ primaryStage.scene.root = vue }
+        //Nombre de joueur bouton
+        nombreJoueurs.joueur1.onAction = EventHandler{primaryStage.scene.root = MenuPerso1}
+        nombreJoueurs.joueur2.onAction = EventHandler{primaryStage.scene.root = MenuPerso2}
 
 
 

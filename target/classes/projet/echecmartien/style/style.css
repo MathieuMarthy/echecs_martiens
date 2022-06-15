@@ -50,3 +50,10 @@
     -fx-stroke-width: 2px;
 
 }
+
+.grille{
+ -fx-background-image: url("fooon.png");
+ -fx-background-size:105%;
+ -fx-background-position: center;
+ -fx-background-repeat:  no-repeat;
+}
