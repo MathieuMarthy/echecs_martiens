@@ -3,14 +3,14 @@ package projet.echecmartien
 import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.scene.Scene
+import javafx.stage.FileChooser
 import javafx.stage.Screen
-
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
-import projet.echecmartien.Vue.GrilleJeu
 import projet.echecmartien.modele.IA
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.modele.Joueur
+
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -58,6 +58,16 @@ class AppliJeuEchecMartien: Application() {
         //MenuPerso2 boutons
         MenuPerso2.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
         MenuPerso2.boutton1.onAction = EventHandler{primaryStage.scene.root = grille}
+
+
+        // test file chooser
+
+
+        //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
+        MenuPerso1.right1.onAction = EventHandler {MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
+        MenuPerso1.left1.onAction = EventHandler {MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
+        MenuPerso1.fileChooser.title = "Open File"
+        MenuPerso1.testlabel.text = MenuPerso1.fileChooser.initialFileName
 
 
 

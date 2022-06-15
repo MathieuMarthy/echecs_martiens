@@ -1,6 +1,6 @@
 package projet.echecmartien.Vue;
 
-import javafx.event.ActionEvent
+import javafx.event.EventHandler
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.VPos
@@ -8,14 +8,15 @@ import javafx.scene.control.Button
 import javafx.scene.control.ColorPicker
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
+import javafx.scene.image.ImageView
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
-import javafx.scene.shape.SVGPath
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-
+import javafx.stage.FileChooser
+import projet.echecmartien.modele_graphique.Graphique
 
 
 public class MenuPerso1: GridPane() {
@@ -50,6 +51,13 @@ public class MenuPerso1: GridPane() {
     var left1 = Button("<")
     var left2 = Button("<")
 
+    val fileChooser = FileChooser()
+    var testlabel = Label("")
+
+    var graphique = Graphique()
+    var image_pp: ImageView = ImageView(graphique.getPPCourante())
+
+
 
 
 
@@ -69,17 +77,24 @@ public class MenuPerso1: GridPane() {
 
 
 
-        choix_de_couleur1.setOnAction {
-            fun handle(t: ActionEvent?) {
-                cercle.fill = choix_de_couleur1.value
-            }
-        }
+
+
+        //cercle.fill = Color.WHITE
+        choix_de_couleur1.onAction = EventHandler{cercle.fill = choix_de_couleur1.value}
+        choix_de_couleur1.onAction = EventHandler{cercle.stroke = choix_de_couleur1.value}
+
+       // var test = ImageView(Image("C:\\Users\\tomas\\IdeaProjects\\eq_2_07_marthy-mathieu_martineau-tomas_nicou-fabien_vandemeulebroucke-bertin-nolan\\target\\classes\\projet\\echecmartien\\pp\\3_yeux_violets.png"))
+        cercle.centerX = image_pp.fitHeight+100
+        cercle.centerY = image_pp.fitWidth+100
+        image_pp.clip = cercle
+
 
 
         g1.padding = Insets(0.0,0.0,0.0,120.0)
         g1.add(left1,0,0)
-        g1.add(cercle,1,0)
+        g1.add(image_pp,1,0)
         g1.add(right1,2,0)
+        println(testlabel)
 
 
 
