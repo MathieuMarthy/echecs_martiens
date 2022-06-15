@@ -8,18 +8,17 @@ import javafx.scene.control.Label
 import javafx.scene.layout.*
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
+import javafx.stage.Screen
 
+class GrilleJeu : BorderPane(){
 
-internal class
-GrilleJeu : BorderPane(){
+    var grille : GridPane = GridPane()
 
-    val grille : GridPane = GridPane()
+    var couleur1 : String = "#f5000c"
+    var nuance1 : String = "#F8916B"
 
-    var couleur1 : String = "#F8916B"
-    var nuance1 : String = "#f5000c"
-
-    var couleur2 : String = "#A5BECC"
-    var nuance2 : String = "#243A73"
+    var couleur2 : String = "#243A73"
+    var nuance2 : String = "#A5BECC"
 
     val bandeauHaut = HBox()
     val grilleGauche = GridPane()
@@ -42,14 +41,14 @@ GrilleJeu : BorderPane(){
 
     val quitter = Button("Quitter")
     val regles = Button("Règles")
-    val ff = Button("FF")
+    val ff = Button("Rejouer")
 
     init{
 
         //Création du damier
         for (nbLignes in 0 until 8){
             for (nbColonnes in 0 until 4){
-                val case = Rectangle(120.0,120.0)
+                val case = Rectangle(110.0,110.0)
                 if (nbLignes <=3){
                     if ((nbColonnes+nbLignes)%2==1){
                         case.style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
@@ -77,6 +76,7 @@ GrilleJeu : BorderPane(){
         var rayon : Double = 30.0
         for (i in 0 until 3){
             val pionModele = Circle(rayon)
+            pionModele.style = "-fx-fill: $couleur1;"
             grilleGauche.add(pionModele,0,i)
             rayon+=10.0
         }
@@ -85,26 +85,33 @@ GrilleJeu : BorderPane(){
         grilleGauche.add(Label("x$nbGrandJ1"),1,2)
 
         gauche.alignment = Pos.BOTTOM_CENTER
+        grilleGauche.vgap = 30.0
         this.left = gauche
 
         gauche.children.addAll(joueur1,grilleGauche)
 
         //Zone de droite
-        grilleDroite.add(Label("x$nbPetitJ2"),0,0)
-        grilleDroite.add(Label("x$nbMoyenJ2"),0,1)
-        grilleDroite.add(Label("x$nbGrandJ2"),0,2)
+        grilleDroite.add(Label("x$nbPetitJ2"),1,0)
+        grilleDroite.add(Label("x$nbMoyenJ2"),1,1)
+        grilleDroite.add(Label("x$nbGrandJ2"),1,2)
 
         rayon = 30.0
         for (i in 0 until 3){
             val pionModele = Circle(rayon)
-            grilleDroite.add(pionModele,1,i)
+            pionModele.style = "-fx-fill: $couleur2;"
+            grilleDroite.add(pionModele,0,i)
             rayon+=10.0
         }
 
         droite.alignment = Pos.BOTTOM_CENTER
+        droite.padding = Insets(30.0)
+        gauche.padding = Insets(30.0)
+        droite.spacing = 50.0
+        gauche.spacing = 50.0
         this.right = droite
 
         droite.children.addAll(joueur2,grilleDroite)
+        grilleDroite.vgap = 30.0
 
         //Centrage des grid
         for (i in 0 until 6){
@@ -112,12 +119,32 @@ GrilleJeu : BorderPane(){
             GridPane.setHalignment(grilleGauche.children[i],HPos.CENTER)
         }
 
+        //Place 1 point sur le plateau
+        var cercle = Circle(50.0)
+        grille.children.add(0,cercle)
+        cercle.toFront()
+        var haligne = ColumnConstraints()
+        haligne.halignment = HPos.CENTER
+        grille.columnConstraints.add(haligne)
 
-        bandeauHaut.children.addAll(quitter,regles,ff)
+        var bandeauHautGauche = HBox()
+        bandeauHautGauche.children.addAll(quitter,regles)
+        bandeauHaut.children.addAll(bandeauHautGauche,ff)
         this.top = bandeauHaut
+        bandeauHautGauche.spacing = 10.0
+        bandeauHaut.alignment = Pos.CENTER
+        bandeauHaut.spacing = 1300.0
+
     }
 
     fun addStyle(){
         this.styleClass.add("grille")
+        this.top.styleClass.add("boutonsGrille")
+        this.left.styleClass.add("texteGrille")
+        this.right.styleClass.add("texteGrille")
+    }
+
+    fun updateGrille(grid : GridPane){
+        this.grille = grid
     }
 }

@@ -12,7 +12,9 @@ fun main() {
     jeu.getJoueurCourant().setPionsCaptures(mutableSetOf(MoyenPion(), MoyenPion(), MoyenPion(), MoyenPion()))
     jeu.sauvegarderPartie("1")
 
-    println(jeu.getPlateau())
+    var plateau = Plateau()
+    plateau.initialiser()
+
 
     jeu = null
 

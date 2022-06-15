@@ -3,12 +3,12 @@ package projet.echecmartien
 import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.scene.Scene
-import javafx.scene.input.KeyCombination
 import javafx.stage.Screen
 
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
 import projet.echecmartien.Vue.GrilleJeu
+import projet.echecmartien.modele.Jeu
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -28,7 +28,7 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.isFullScreen = true
 
         //Création des scènes
-        val sceneMenu = Scene(vue, largeur, longueur)
+        val sceneMenu = Scene(grille, largeur, longueur)
 
         //Ajout du style
         sceneMenu.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
@@ -52,6 +52,8 @@ class AppliJeuEchecMartien: Application() {
         nombreJoueurs.joueur1.onAction = EventHandler{primaryStage.scene.root = MenuPerso1}
         nombreJoueurs.joueur2.onAction = EventHandler{primaryStage.scene.root = MenuPerso2}
 
+        //Mise en place du plateau
+        var jeu: Jeu = Jeu()
 
 
         //Mise en place de la scène
