@@ -9,6 +9,10 @@ import javafx.scene.layout.*
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
 import javafx.stage.Screen
+import projet.echecmartien.modele.Case
+import projet.echecmartien.modele.GrandPion
+import projet.echecmartien.modele.MoyenPion
+import projet.echecmartien.modele.PetitPion
 
 class GrilleJeu : BorderPane(){
 
@@ -119,14 +123,6 @@ class GrilleJeu : BorderPane(){
             GridPane.setHalignment(grilleGauche.children[i],HPos.CENTER)
         }
 
-        //Place 1 point sur le plateau
-        var cercle = Circle(50.0)
-        grille.children.add(0,cercle)
-        cercle.toFront()
-        var haligne = ColumnConstraints()
-        haligne.halignment = HPos.CENTER
-        grille.columnConstraints.add(haligne)
-
         var bandeauHautGauche = HBox()
         bandeauHautGauche.children.addAll(quitter,regles)
         bandeauHaut.children.addAll(bandeauHautGauche,ff)
@@ -144,7 +140,20 @@ class GrilleJeu : BorderPane(){
         this.right.styleClass.add("texteGrille")
     }
 
-    fun updateGrille(grid : GridPane){
-        this.grille = grid
+    fun updateGrille(matrice : Array<Array<Case>>){
+        for ((i, ligne) in matrice.withIndex()) {
+            for ((j, case) in ligne.withIndex()) {
+                 val cercle = when (case.getPion()) {
+                    is PetitPion -> Circle(30.0)
+                    is MoyenPion -> Circle(40.0)
+                    is GrandPion -> Circle(50.0)
+                    else -> null
+                }
+                if (cercle != null){
+                    this.grille.children.add(i * 4 + j, cercle)
+                    cercle.toFront()
+                }
+            }
+        }
     }
 }

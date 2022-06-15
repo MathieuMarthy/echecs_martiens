@@ -56,6 +56,7 @@ class AppliJeuEchecMartien: Application() {
         var jeu: Jeu = Jeu()
 
 
+
         //Mise en place de la scène
         primaryStage.title="Echecs Martiens"
         primaryStage.scene=sceneMenu
