@@ -36,6 +36,7 @@ public class MenuPerso1: GridPane() {
     var boutton2 = Button("Retour")
     var boutton1 = Button("Lancer")
 
+
     var right1 = Button(">")
     var right2 = Button(">")
 
