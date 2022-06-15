@@ -8,7 +8,9 @@ import javafx.stage.Screen
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
 import projet.echecmartien.Vue.GrilleJeu
+import projet.echecmartien.modele.IA
 import projet.echecmartien.modele.Jeu
+import projet.echecmartien.modele.Joueur
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -57,12 +59,18 @@ class AppliJeuEchecMartien: Application() {
         MenuPerso2.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
         MenuPerso2.boutton1.onAction = EventHandler{primaryStage.scene.root = grille}
 
-        //Lanceer partie
-        MenuPerso1.
+
 
         //Mise en place du plateau
         var jeu: Jeu = Jeu()
 
+        //Lancer partie
+        MenuPerso1.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
+        MenuPerso1.boutton1.onAction = EventHandler{
+            primaryStage.scene.root = grille
+            jeu.initialiserPartie(joueur1 = Joueur(MenuPerso1.champ_de_saisi.text), IA("Cortana", jeu), 5)
+            grille.updateGrille(jeu.getPlateau().getCases())
+        }
 
 
         //Mise en place de la scène

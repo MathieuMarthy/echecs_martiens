@@ -143,6 +143,7 @@ class GrilleJeu : BorderPane(){
     fun updateGrille(matrice : Array<Array<Case>>){
         for ((i, ligne) in matrice.withIndex()) {
             for ((j, case) in ligne.withIndex()) {
+
                  val cercle = when (case.getPion()) {
                     is PetitPion -> Circle(30.0)
                     is MoyenPion -> Circle(40.0)
@@ -150,10 +151,12 @@ class GrilleJeu : BorderPane(){
                     else -> null
                 }
                 if (cercle != null){
-                    this.grille.children.add(i * 4 + j, cercle)
+                    this.grille.add(cercle,j,i)
                     cercle.toFront()
+                    GridPane.setHalignment(cercle,HPos.CENTER)
                 }
             }
         }
     }
+
 }
