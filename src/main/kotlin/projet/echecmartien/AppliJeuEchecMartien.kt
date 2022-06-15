@@ -19,7 +19,7 @@ class AppliJeuEchecMartien: Application() {
         val charger =  Charger()
         var nombreJoueurs = NombreJoueurs()
         val MenuPerso1 = MenuPerso1()
-        val MenuPerso2 = MenuPerso1()
+        val MenuPerso2 = MenuPerso2()
 
 
         //Récupération des dimensions de l'écran & mise en plein écran de la scène
@@ -36,6 +36,7 @@ class AppliJeuEchecMartien: Application() {
         vue.addStyle()
         charger.addStyle()
         grille.addStyle()
+        MenuPerso2.addStyle()
 
         //Controleurs
 
@@ -48,9 +49,12 @@ class AppliJeuEchecMartien: Application() {
         vue.boutonLoad.onAction = EventHandler{ primaryStage.scene.root = charger }
         //Retour (Charger partie)
         charger.nouveau5.onAction = EventHandler{ primaryStage.scene.root = vue }
-        //Nombre de joueur bouton
+        //Nombre de joueur boutons
         nombreJoueurs.joueur1.onAction = EventHandler{primaryStage.scene.root = MenuPerso1}
         nombreJoueurs.joueur2.onAction = EventHandler{primaryStage.scene.root = MenuPerso2}
+        //MenuPerso2 boutons
+        MenuPerso2.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
+        MenuPerso2.boutton1.onAction = EventHandler{primaryStage.scene.root = grille}
 
 
 
