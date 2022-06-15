@@ -8,6 +8,7 @@ import javafx.scene.control.ColorPicker
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField
 import javafx.scene.layout.*
+import javafx.scene.shape.Circle
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -60,10 +61,12 @@ public class MenuPerso1: GridPane() {
 
         Border1.left = left1
         Border1.right = right1
-        Border1.center
+        Border1.center = Circle(10.0)
 
         Border2.left = left2
         Border2.right = right2
+        Border1.center = Circle(10.0)
+
 
 
 
