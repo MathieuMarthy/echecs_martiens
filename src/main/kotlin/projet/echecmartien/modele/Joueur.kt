@@ -1,6 +1,6 @@
 package projet.echecmartien.modele
 
-class Joueur(private var pseudo: String) {
+open class Joueur(private var pseudo: String) {
 
     private var pionsCaptures: MutableSet<Pion> = mutableSetOf()
 

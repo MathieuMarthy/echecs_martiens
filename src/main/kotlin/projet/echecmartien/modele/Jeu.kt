@@ -2,10 +2,7 @@ package projet.echecmartien.modele
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileReader
-import java.io.FileWriter
+import java.io.*
 
 
 public class Jeu(): InterfaceJeu {
@@ -26,6 +23,15 @@ public class Jeu(): InterfaceJeu {
 
     // utile
     private var path = System.getProperty("user.dir") + "/Sauvegardes"
+    private var sauvegardes: MutableList<String> = mutableListOf()
+
+    init {
+        File("$path/").walk().forEach {
+            if (it.isFile) {
+                this.sauvegardes.add(it.toString())
+            }
+        }
+    }
 
     /**
      * getter
@@ -156,12 +162,16 @@ public class Jeu(): InterfaceJeu {
         return depart.getJoueur() == joueur
     }
 
-    fun tousLesCoupsPossibles(coordOrigineX: Int, coordOrigineY: Int){
+    fun tousLesCoupsPossibles(coordOrigineX: Int, coordOrigineY: Int): MutableList<Coordonnee> {
+        val coups = mutableListOf<Coordonnee>()
         for (b in 0 until this.plateau.getTailleVerticale()) {
             for (a in 0 until this.plateau.getTailleHorizontale()) {
-                print("")
+                if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurCourant)) {
+                    coups.add(Coordonnee(b, a))
+                }
             }
         }
+        return coups
     }
 
     override fun deplacer(coordOrigineY: Int, coordOrigineX: Int, coordDestinationY: Int, coordDestinationX: Int) {
@@ -209,7 +219,7 @@ public class Jeu(): InterfaceJeu {
      */
     fun getPlateau(): Plateau = this.plateau
 
-    fun sauvegarderPartie(nomSauvegarde: String) {
+    fun sauvegarderPartie(numeroSauvegarde: String) {
 
         // création du json
         var string_json = "{"
@@ -246,29 +256,28 @@ public class Jeu(): InterfaceJeu {
 
         // arrive de zone
         string_json += """","arrivedezone":"$arrivedezone"}"""
-        val file = FileWriter("$path/$nomSauvegarde.json")
-        /*Gson().toJson(string_json, file)*/
+        val file = FileWriter("$path/$numeroSauvegarde.json")
         file.write(string_json)
         file.flush()
         file.close()
     }
 
-    fun chargerPartie(nomSauvegarde: String) {
+    fun chargerPartie(numeroSauvegarde: String) {
         // vérification si le fichier existe
-        val file = File("$path/$nomSauvegarde.json")
+        val file = File("$path/$numeroSauvegarde.json")
         if (!file.exists()) {
             throw FileNotFoundException("Le fichier de sauvegarde n'existe pas")
         }
 
         // récupération des données
-        val reader = FileReader("$path/$nomSauvegarde.json")
+        val reader = FileReader("$path/$numeroSauvegarde.json")
         val json = Gson().fromJson(reader, JsonObject::class.java)
 
         // -- Plateau
-        // création de matrice vide
+        // création d'une matrice vide
         val tempPlateau = Array(this.plateau.getTailleVerticale()) { Array(this.plateau.getTailleHorizontale()) { Case() } }
 
-        // remplisage de la matrice
+        // remplissage de la matrice
         for ((i, ligne) in tempPlateau.withIndex()) {
             for ((j, case) in ligne.withIndex()) {
                 val pion = when(json["plateau"].asString[i * 4 + j].toString()) {
@@ -307,17 +316,8 @@ public class Jeu(): InterfaceJeu {
         // -- joueur courant
         val courant = json["joueur_courant"].asString
         this.joueurCourant = this.joueurs[if (p1.getPseudo() == courant) 0 else 1]
-
-        println("-- courant")
-        println(this.joueurCourant.getPseudo())
-        println("-- plateau")
-        println(this.plateau.toString())
-        println("-- captures")
-        for (p in this.joueurs) {
-            println(p.getPseudo())
-            println(p.getPionsCaptures())
-        }
-
     }
+
+
 
 }

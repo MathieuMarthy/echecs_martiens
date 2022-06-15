@@ -10,13 +10,13 @@ fun main() {
     jeu.getJoueurCourant().setPionsCaptures(mutableSetOf(PetitPion(), PetitPion(), GrandPion(), GrandPion()))
     jeu.changeJoueurCourant()
     jeu.getJoueurCourant().setPionsCaptures(mutableSetOf(MoyenPion(), MoyenPion(), MoyenPion(), MoyenPion()))
-    jeu.sauvegarderPartie("salut")
+    jeu.sauvegarderPartie("1")
 
     println(jeu.getPlateau())
 
     jeu = null
 
     jeu = Jeu()
-    jeu.chargerPartie("salut")
-
+    jeu.chargerPartie("1")
+    println(jeu.getPlateau())
 }
