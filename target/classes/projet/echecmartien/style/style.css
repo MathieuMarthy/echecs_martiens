@@ -80,6 +80,24 @@
     -fx-stroke-width: 2px;
 }
 
+.boutons4 .button{
+-fx-background:linear-gradient(to bottom, #dfbdfa 5%, #bc80ea 100%);
+-fx-background-color:rgba(176, 115, 222, 0.8);
+-fx-border-radius:11px;
+-fx-cursor:pointer;
+-fx-text-fill:white;
+-fx-font-family:Arial;
+-fx-font-size:25px;
+-fx-font-weight:bold;
+-fx-padding:15px 100px;
+-fx-text-decoration:none;
+
+}
+.boutons4 .button{
+	-fx-stroke: purple;
+    -fx-stroke-width: 2px;
+}
+
 .grille{
  -fx-background-image: url("fooon.png");
  -fx-background-size:105%;

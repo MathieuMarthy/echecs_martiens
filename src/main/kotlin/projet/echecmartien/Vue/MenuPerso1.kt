@@ -1,22 +1,27 @@
 package projet.echecmartien.Vue;
 
+import javafx.event.ActionEvent
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.VPos
 import javafx.scene.control.Button
 import javafx.scene.control.ColorPicker
-import javafx.scene.control.Label;
+import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.layout.*
+import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
+import javafx.scene.shape.SVGPath
+import javafx.scene.text.Font
+import javafx.scene.text.FontPosture
+import javafx.scene.text.FontWeight
+
+
 
 public class MenuPerso1: GridPane() {
 
-    var Border1 = BorderPane()
-    var Border2 = BorderPane()
+    var g1 = GridPane()
+    var h2 = HBox()
 
 
 
@@ -28,6 +33,8 @@ public class MenuPerso1: GridPane() {
     var champ_de_saisi1: TextField = TextField("Entrez votre pseudo")
     var champ_de_saisi2: TextField = TextField("Entrez votre pseudo")
     var photo_de_profil1: Label = Label("Photo de profil")
+
+    var cercle : Circle = Circle(50.0)
 
     var couleurs1: Label = Label("Couleurs")
     var couleurs2: Label = Label("Couleurs")
@@ -41,8 +48,8 @@ public class MenuPerso1: GridPane() {
     var right1 = Button(">")
     var right2 = Button(">")
 
-    var left1 = Button(">")
-    var left2 = Button(">")
+    var left1 = Button("<")
+    var left2 = Button("<")
 
 
 
@@ -61,13 +68,25 @@ public class MenuPerso1: GridPane() {
         couleurs1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
 
-        Border1.left = left1
-        Border1.right = right1
-        Border1.center = Circle(10.0)
 
-        Border2.left = left2
-        Border2.right = right2
-        Border1.center = Circle(10.0)
+
+
+        choix_de_couleur1.setOnAction {
+            fun handle(t: ActionEvent?) {
+                cercle.fill = choix_de_couleur1.value
+            }
+        }
+
+
+        g1.padding = Insets(0.0,0.0,0.0,120.0)
+        g1.add(left1,0,0)
+        g1.add(cercle,1,0)
+        g1.add(right1,2,0)
+
+
+
+
+
 
 
 
@@ -106,7 +125,7 @@ public class MenuPerso1: GridPane() {
 
         val ligne2 = RowConstraints()
         ligne2.valignment = VPos.BASELINE
-        ligne2.percentHeight = 20.0
+        ligne2.percentHeight = 30.0
 
 
 
@@ -132,6 +151,8 @@ public class MenuPerso1: GridPane() {
         this.add(champ_de_saisi1, 1, 2)
 
         this.add(photo_de_profil1, 2, 1)
+        this.add(g1, 2, 2)
+
 
         this.add(couleurs1, 3, 1)
         this.add(couleurs2, 3, 1)
@@ -149,11 +170,12 @@ public class MenuPerso1: GridPane() {
         choix_de_couleur2.styleClass.add("")
         champ_de_saisi1.styleClass.add("")
         this.styleClass.add("textfield")
-        this.styleClass.add("boutons3")
+        this.styleClass.add("boutons4")
         this.styleClass.add("fond2")
         this.styleClass.add("text1")
 
     }
+
 
 
 }
