@@ -17,6 +17,11 @@ import javafx.scene.text.FontWeight
 
 public class MenuPerso2: GridPane() {
 
+    var Border1 = BorderPane()
+    var Border2 = BorderPane()
+
+
+
     var titre: Label = Label("Menu de Personnalisation")
     var pseudo1: Label = Label("Pseudo")
     var pseudo2: Label = Label("Pseudo")
@@ -32,7 +37,14 @@ public class MenuPerso2: GridPane() {
     var choix_de_couleur2:  ColorPicker = ColorPicker()
 
     var boutton2 = Button("Retour")
-    var boutton1 = Button("Valider")
+    var boutton1 = Button("Lancer")
+
+    var right1 = Button(">")
+    var right2 = Button(">")
+
+    var left1 = Button(">")
+    var left2 = Button(">")
+
 
 
 
@@ -50,12 +62,21 @@ public class MenuPerso2: GridPane() {
         couleurs1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
 
+        Border1.left = left1
+        Border1.right = right1
+        Border1.center
+
+        Border2.left = left2
+        Border2.right = right2
 
 
-        choix_de_couleur1.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
+
+
+
+        /*choix_de_couleur1.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
         choix_de_couleur2.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
         champ_de_saisi1.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        champ_de_saisi2.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
+        champ_de_saisi2.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))*/
 
 
         val col0 = ColumnConstraints()

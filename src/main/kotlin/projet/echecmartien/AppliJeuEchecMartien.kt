@@ -36,6 +36,8 @@ class AppliJeuEchecMartien: Application() {
         vue.addStyle()
         charger.addStyle()
         grille.addStyle()
+        MenuPerso1.addStyle()
+
         MenuPerso2.addStyle()
 
         //Controleurs
