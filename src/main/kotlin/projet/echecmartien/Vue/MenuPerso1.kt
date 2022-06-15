@@ -1,4 +1,3 @@
-
 package projet.echecmartien.Vue;
 
 import javafx.geometry.HPos
