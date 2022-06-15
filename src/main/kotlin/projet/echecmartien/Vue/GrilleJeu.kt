@@ -1,5 +1,6 @@
 package projet.echecmartien.Vue
 
+import javafx.event.EventHandler
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
@@ -8,11 +9,11 @@ import javafx.scene.control.Label
 import javafx.scene.layout.*
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
-import javafx.stage.Screen
 import projet.echecmartien.modele.Case
 import projet.echecmartien.modele.GrandPion
 import projet.echecmartien.modele.MoyenPion
 import projet.echecmartien.modele.PetitPion
+
 
 class GrilleJeu : BorderPane(){
 
@@ -48,29 +49,16 @@ class GrilleJeu : BorderPane(){
     val ff = Button("Rejouer")
 
     init{
-
-        //Création du damier
         for (nbLignes in 0 until 8){
             for (nbColonnes in 0 until 4){
+                var stack = StackPane()
                 val case = Rectangle(110.0,110.0)
-                if (nbLignes <=3){
-                    if ((nbColonnes+nbLignes)%2==1){
-                        case.style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }else{
-                        case.style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }
-                    grille.add(case,nbColonnes,nbLignes)
-                }
-                else{
-                    if ((nbColonnes+nbLignes)%2==1){
-                        case.style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }else{
-                        case.style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }
-                    grille.add(case,nbColonnes,nbLignes)
-                }
+
+                stack.children.add(case)
+                grille.add(stack,nbColonnes,nbLignes)
             }
         }
+        creationDamier()
 
         //Positionnement
         this.center = grille
@@ -131,6 +119,7 @@ class GrilleJeu : BorderPane(){
         bandeauHaut.alignment = Pos.CENTER
         bandeauHaut.spacing = 1300.0
 
+
     }
 
     fun addStyle(){
@@ -140,23 +129,30 @@ class GrilleJeu : BorderPane(){
         this.right.styleClass.add("texteGrille")
     }
 
-    fun updateGrille(matrice : Array<Array<Case>>){
-        for ((i, ligne) in matrice.withIndex()) {
-            for ((j, case) in ligne.withIndex()) {
-
-                 val cercle = when (case.getPion()) {
-                    is PetitPion -> Circle(30.0)
-                    is MoyenPion -> Circle(40.0)
-                    is GrandPion -> Circle(50.0)
-                    else -> null
+    fun creationDamier(){
+        //Création du damier
+        for (nbLignes in 0 until 8){
+            for (nbColonnes in 0 until 4){
+                if (nbLignes <=3){
+                    if ((nbColonnes+nbLignes)%2==1){
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }else{
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }
                 }
-                if (cercle != null){
-                    this.grille.add(cercle,j,i)
-                    cercle.toFront()
-                    GridPane.setHalignment(cercle,HPos.CENTER)
+                else{
+                    if ((nbColonnes+nbLignes)%2==1){
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }else{
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }
                 }
             }
         }
     }
+
+
+
+
 
 }

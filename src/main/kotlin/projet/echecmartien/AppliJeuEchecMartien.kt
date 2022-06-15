@@ -2,15 +2,16 @@ package projet.echecmartien
 
 import javafx.application.Application
 import javafx.event.EventHandler
+import javafx.geometry.HPos
 import javafx.scene.Scene
+import javafx.scene.layout.GridPane
+import javafx.scene.layout.StackPane
+import javafx.scene.shape.Circle
+import javafx.scene.shape.Rectangle
 import javafx.stage.Screen
-
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
-import projet.echecmartien.Vue.GrilleJeu
-import projet.echecmartien.modele.IA
-import projet.echecmartien.modele.Jeu
-import projet.echecmartien.modele.Joueur
+import projet.echecmartien.modele.*
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -66,11 +67,13 @@ class AppliJeuEchecMartien: Application() {
 
         //Lancer partie
         MenuPerso1.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
-        MenuPerso1.boutton1.onAction = EventHandler{
-            primaryStage.scene.root = grille
-            jeu.initialiserPartie(joueur1 = Joueur(MenuPerso1.champ_de_saisi.text), IA("Cortana", jeu), 5)
-            grille.updateGrille(jeu.getPlateau().getCases())
-        }
+        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,sceneMenu,primaryStage)
+
+
+
+
+
+
 
 
         //Mise en place de la scène
@@ -79,6 +82,25 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.show()
     }
 
+    /*fun updateGrille(matrice : Array<Array<Case>>){
+
+        for ((i, ligne) in matrice.withIndex()) {
+            for ((j, case) in ligne.withIndex()) {
+
+                val cercle = when (case.getPion()) {
+                    is PetitPion -> Circle(30.0)
+                    is MoyenPion -> Circle(40.0)
+                    is GrandPion -> Circle(50.0)
+                    else -> null
+                }
+                if (cercle != null){
+                    cercle.onMouseClicked = EventHandler { println("cc") }
+                    grille.grille.add(cercle,j,i)
+                    GridPane.setHalignment(cercle, HPos.CENTER)
+                }
+            }
+        }
+    }*/
 }
 
 fun main(){
