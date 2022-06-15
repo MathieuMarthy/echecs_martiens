@@ -5,6 +5,7 @@ module projet.echecmartien {
 
     requires org.controlsfx.controls;
     requires com.google.gson;
+    requires jdk.jfr;
 
     opens projet.echecmartien to javafx.fxml;
     exports projet.echecmartien;
