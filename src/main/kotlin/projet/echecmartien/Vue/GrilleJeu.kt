@@ -70,8 +70,8 @@ GrilleJeu : BorderPane(){
         }
 
         //Positionnement
-        grille.vgap = 5.0
-        grille.hgap = 5.0
+        grille.vgap = 0.0
+        grille.hgap = 0.0
         this.center = grille
         grille.alignment = Pos.CENTER
 
