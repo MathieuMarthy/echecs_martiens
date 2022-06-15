@@ -28,7 +28,7 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.isFullScreen = true
 
         //Création des scènes
-        val sceneMenu = Scene(grille, largeur, longueur)
+        val sceneMenu = Scene(vue, largeur, longueur)
 
         //Ajout du style
         sceneMenu.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
@@ -37,7 +37,6 @@ class AppliJeuEchecMartien: Application() {
         charger.addStyle()
         grille.addStyle()
         MenuPerso1.addStyle()
-
         MenuPerso2.addStyle()
 
         //Controleurs
@@ -57,6 +56,9 @@ class AppliJeuEchecMartien: Application() {
         //MenuPerso2 boutons
         MenuPerso2.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
         MenuPerso2.boutton1.onAction = EventHandler{primaryStage.scene.root = grille}
+
+        //Lanceer partie
+        MenuPerso1.
 
         //Mise en place du plateau
         var jeu: Jeu = Jeu()

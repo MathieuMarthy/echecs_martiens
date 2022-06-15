@@ -24,8 +24,7 @@ public class MenuPerso1: GridPane() {
     var pseudo2: Label = Label("Pseudo")
     var labelJoueur1: Label = Label("Joueur 1")
     var labelJoueur2: Label = Label("Joueur 2")
-    var champ_de_saisi1: TextField = TextField("Entrez votre pseudo")
-    var champ_de_saisi2: TextField = TextField("Entrez votre pseudo")
+    var champ_de_saisi: TextField = TextField("Entrez votre pseudo")
     var photo_de_profil1: Label = Label("Photo de profil")
 
     var couleurs1: Label = Label("Couleurs")
@@ -54,8 +53,7 @@ public class MenuPerso1: GridPane() {
         pseudo2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         labelJoueur1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
         labelJoueur2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
-        champ_de_saisi1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
-        champ_de_saisi2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
+        champ_de_saisi.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
         photo_de_profil1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         couleurs1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
@@ -126,7 +124,7 @@ public class MenuPerso1: GridPane() {
 
         this.add(labelJoueur1, 0, 2)
 
-        this.add(champ_de_saisi1, 1, 2)
+        this.add(champ_de_saisi, 1, 2)
 
         this.add(photo_de_profil1, 2, 1)
 
@@ -144,7 +142,7 @@ public class MenuPerso1: GridPane() {
     fun addStyle(){
         choix_de_couleur1.styleClass.add("")
         choix_de_couleur2.styleClass.add("")
-        champ_de_saisi1.styleClass.add("")
+        champ_de_saisi.styleClass.add("")
         this.styleClass.add("textfield")
         this.styleClass.add("boutons3")
         this.styleClass.add("fond2")
