@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import projet.echecmartien.AppliJeuEchecMartien
 import java.io.*
+import java.lang.Exception
 
 
 public class Jeu(): InterfaceJeu {
@@ -167,8 +168,12 @@ public class Jeu(): InterfaceJeu {
         val coups = mutableListOf<Coordonnee>()
         for (b in 0 until this.plateau.getTailleVerticale()) {
             for (a in 0 until this.plateau.getTailleHorizontale()) {
-                if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurCourant)) {
-                    coups.add(Coordonnee(b, a))
+                try {
+                    if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurCourant)) {
+                        coups.add(Coordonnee(b, a))
+                    }
+                } catch (e: Exception) {
+
                 }
             }
         }
