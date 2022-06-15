@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="echecMartien" />
+        <module name="eq_2_07_marthy-mathieu_martineau-tomas_nicou-fabien_vandemeulebroucke-bertin-nolan" />
       </profile>
     </annotationProcessing>
   </component>

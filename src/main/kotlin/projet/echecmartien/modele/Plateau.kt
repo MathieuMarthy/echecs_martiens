@@ -82,4 +82,8 @@ class Plateau {
         }
         return string
     }
+
+    fun setMatrice(matrice: Array<Array<Case>>) {
+        this.cases = matrice
+    }
 }

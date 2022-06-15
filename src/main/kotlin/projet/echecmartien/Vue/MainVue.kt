@@ -29,10 +29,10 @@ class MainVue: AnchorPane() {
     private var planet = ImageView(AppliJeuEchecMartien::class.java.getResource("style/planet.gif").toExternalForm())
 
     //BOUTONS
-    private var boutonNew = Button("Nouvelle partie")
-    private var boutonLoad = Button("Charger partie")
-    private var boutonRules = Button("Règles du jeu")
-    private var boutons = VBox()
+    var boutonNew = Button("Nouvelle partie")
+    var boutonLoad = Button("Charger partie")
+    var boutonRules = Button("Règles du jeu")
+    var boutons = VBox()
 
     init {
 
