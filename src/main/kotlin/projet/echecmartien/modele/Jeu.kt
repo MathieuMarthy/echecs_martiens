@@ -169,10 +169,10 @@ public class Jeu(): InterfaceJeu {
         for (b in 0 until this.plateau.getTailleVerticale()) {
             for (a in 0 until this.plateau.getTailleHorizontale()) {
                 try {
-                    if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurCourant)) {
+                    if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurs[1])) {
                         coups.add(Coordonnee(b, a))
                     }
-                } catch (e: Exception) {
+                } catch (_: Exception) {
 
                 }
             }
@@ -329,6 +329,13 @@ public class Jeu(): InterfaceJeu {
         // -- joueur courant
         val courant = json["joueur_courant"].asString
         this.joueurCourant = this.joueurs[if (p1.getPseudo() == courant) 0 else 1]
+    }
+
+    fun IAjoue() {
+        if (this.joueurCourant is IA) {
+            val deplacement = (this.joueurCourant as IA).deplace()
+            this.deplacer(deplacement[0], deplacement[1], deplacement[2], deplacement[3])
+        }
     }
 
 
