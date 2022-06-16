@@ -6,6 +6,7 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.image.ImageView
 import javafx.scene.layout.*
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
@@ -43,6 +44,11 @@ class GrilleJeu : BorderPane(){
     var nbPetitJ2 = 0
     var nbMoyenJ2 = 0
     var nbGrandJ2 = 0
+
+    var MenuPerso2 = MenuPerso2()
+
+    var imagedroite = ImageView()
+    var imagegauche = ImageView()
 
     val quitter = Button("Quitter")
     val regles = Button("Règles")
@@ -96,7 +102,9 @@ class GrilleJeu : BorderPane(){
         grilleGauche.vgap = 30.0
         this.left = gauche
 
-        gauche.children.addAll(joueur1,grilleGauche)
+        imagedroite = MenuPerso2.image_pp
+
+        gauche.children.addAll(imagedroite, joueur1,grilleGauche)
 
         //Zone de droite
         grilleDroite.add(Label("x$nbPetitJ2"),1,0)
@@ -117,8 +125,10 @@ class GrilleJeu : BorderPane(){
         droite.spacing = 50.0
         gauche.spacing = 50.0
         this.right = droite
+        imagegauche = this.MenuPerso2.image_pp2
 
-        droite.children.addAll(joueur2,grilleDroite)
+
+        droite.children.addAll(imagegauche,joueur2,grilleDroite)
         grilleDroite.vgap = 30.0
 
         //Centrage des grid
