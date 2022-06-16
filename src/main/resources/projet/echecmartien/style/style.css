@@ -89,6 +89,9 @@
 -fx-stroke: purple;
 -fx-fill: white;
 }
+.text2 .text{
+-fx-fill: white;
+}
 
 .boutons .button{
 	-fx-background:linear-gradient(to bottom, #dfbdfa 5%, #bc80ea 100%);
@@ -101,6 +104,7 @@
 	-fx-font-weight:bold;
 	-fx-padding:30px 200px;
 	-fx-text-decoration:none;
+
 
 }
 
@@ -155,7 +159,7 @@
 -fx-font-family:Arial;
 -fx-font-size:25px;
 -fx-font-weight:bold;
--fx-padding:15px 100px;
+-fx-padding:15px 50px;
 -fx-text-decoration:none;
 
 }
@@ -190,15 +194,15 @@
 -fx-font-size:30px;
 }
 
-.text-field{
+.text-field .text{
    -fx-font-family: "Quicksand";
    -fx-font-size: 25;
    -fx-padding: 1,1,1,1;
-   -fx-border-color: pink;
+   -fx-border-color: #A149FA;
    -fx-border-width: 2;
    -fx-border-radius: 1;
    -fx-border: gone;
-   -fx-background-color: white;
+   -fx-background-color: #1687ab;
 }
 
 

@@ -8,6 +8,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.ColorPicker
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
@@ -26,7 +27,7 @@ public class MenuPerso1: GridPane() {
 
 
 
-    var titre: Label = Label("Menu de Personnalisation")
+    var titre: Label = Label("                                   Menu Personnalisation")
     var pseudo1: Label = Label("Pseudo")
     var pseudo2: Label = Label("Pseudo")
     var labelJoueur1: Label = Label("Joueur 1")
@@ -34,12 +35,11 @@ public class MenuPerso1: GridPane() {
     var champ_de_saisi: TextField = TextField("Entrez votre pseudo")
     var photo_de_profil1: Label = Label("Photo de profil")
 
-    var cercle : Circle = Circle(50.0)
-
-    var couleurs1: Label = Label("Couleurs")
-    var couleurs2: Label = Label("Couleurs")
-    var choix_de_couleur1:  ColorPicker = ColorPicker()
-    var choix_de_couleur2:  ColorPicker = ColorPicker()
+    var cercle : Circle = Circle(100.0)
+    //var couleurs1: Label = Label("Couleurs")
+    //var couleurs2: Label = Label("Couleurs")
+    //var choix_de_couleur1:  ColorPicker = ColorPicker()
+    //var choix_de_couleur2:  ColorPicker = ColorPicker()
 
     var boutton2 = Button("Retour")
     var boutton1 = Button("Lancer")
@@ -55,6 +55,7 @@ public class MenuPerso1: GridPane() {
     var testlabel = Label("")
 
     var graphique = Graphique()
+
     var image_pp: ImageView = ImageView(graphique.getPPCourante())
 
 
@@ -71,21 +72,27 @@ public class MenuPerso1: GridPane() {
         labelJoueur2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
         champ_de_saisi.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
         photo_de_profil1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
-        couleurs1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
-        couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
+        //couleurs1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
+        //couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
+        champ_de_saisi.setMaxWidth(300.0);
+        champ_de_saisi.setStyle("-fx-text-fill: white ; -fx-font-size: 25;-fx-padding: 1,1,1,1;-fx-border-color: #A149FA;-fx-border-width: 2;-fx-border-radius: 1;-fx-border: gone;-fx-background-color: #1687ab;");
 
 
 
-
+        right1.maxWidth = 100.0
 
 
         //cercle.fill = Color.WHITE
-        choix_de_couleur1.onAction = EventHandler{cercle.fill = choix_de_couleur1.value}
-        choix_de_couleur1.onAction = EventHandler{cercle.stroke = choix_de_couleur1.value}
+        //choix_de_couleur1.onAction = EventHandler{cercle.fill = choix_de_couleur1.value}
+        //choix_de_couleur1.onAction = EventHandler{cercle.stroke = choix_de_couleur1.value}
 
        // var test = ImageView(Image("C:\\Users\\tomas\\IdeaProjects\\eq_2_07_marthy-mathieu_martineau-tomas_nicou-fabien_vandemeulebroucke-bertin-nolan\\target\\classes\\projet\\echecmartien\\pp\\3_yeux_violets.png"))
-        cercle.centerX = image_pp.fitHeight+100
-        cercle.centerY = image_pp.fitWidth+100
+        cercle.centerX = image_pp.fitHeight+150
+        cercle.centerY = image_pp.fitWidth+150
+        image_pp.fitHeight = 300.0
+        image_pp.fitWidth = 300.0
+
+
         image_pp.clip = cercle
 
 
@@ -114,15 +121,15 @@ public class MenuPerso1: GridPane() {
 
         val col0 = ColumnConstraints()
         col0.halignment = HPos.CENTER
-        col0.percentWidth = 15.0
+        col0.percentWidth = 25.0
 
         val ligne0 = RowConstraints()
         ligne0.valignment = VPos.CENTER
-        ligne0.percentHeight = 30.0
+        ligne0.percentHeight = 20.0
 
         val col1 = ColumnConstraints()
         col1.halignment = HPos.CENTER
-        col1.percentWidth = 15.0
+        col1.percentWidth = 50.0
 
         val ligne1 = RowConstraints()
         ligne1.valignment = VPos.CENTER
@@ -134,28 +141,26 @@ public class MenuPerso1: GridPane() {
 
         val col2 = ColumnConstraints()
         col2.halignment = HPos.CENTER
-        col2.percentWidth = 40.0
+        col2.percentWidth = 50.0
 
         val ligne2 = RowConstraints()
         ligne2.valignment = VPos.BASELINE
-        ligne2.percentHeight = 30.0
+        ligne2.percentHeight = 40.0
 
 
 
-        val col3 = ColumnConstraints()
-        col3.halignment = HPos.CENTER
-        col3.percentWidth = 30.0
 
 
 
-        this.columnConstraints.addAll(col0, col1, col2, col3)
+
+        this.columnConstraints.addAll(col0, col1, col2)
         this.rowConstraints.addAll(ligne0, ligne1, ligne2, ligne3)
 
-        choix_de_couleur1.prefWidth = 300.0
+        //choix_de_couleur1.prefWidth = 300.0
 
 
 
-        this.add(titre, 2, 0)
+        this.add(titre, 1, 0)
         this.add(pseudo1, 1, 1)
 
 
@@ -167,25 +172,26 @@ public class MenuPerso1: GridPane() {
         this.add(g1, 2, 2)
 
 
-        this.add(couleurs1, 3, 1)
-        this.add(couleurs2, 3, 1)
-        this.add(choix_de_couleur1, 3, 2)
+        //this.add(couleurs1, 3, 1)
+        //this.add(couleurs2, 3, 1)
 
-        this.add(boutton1, 2,3)
-        this.add(boutton2, 3,3)
+
+        this.add(boutton1, 1,3)
+        this.add(boutton2, 2,3)
 
 
         this.titre.padding = Insets(0.0, 0.0, 50.0, 0.0)
 
     }
     fun addStyle(){
-        choix_de_couleur1.styleClass.add("")
-        choix_de_couleur2.styleClass.add("")
-        champ_de_saisi.styleClass.add("")
+        //choix_de_couleur1.styleClass.add("")
+        //choix_de_couleur2.styleClass.add("")
+
         this.styleClass.add("textfield")
         this.styleClass.add("boutons4")
         this.styleClass.add("fond2")
         this.styleClass.add("cc")
+
 
     }
 

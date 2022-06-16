@@ -47,7 +47,7 @@ class AppliJeuEchecMartien: Application() {
         grille.addStyle()
         MenuPerso1.addStyle()
         MenuPerso2.addStyle()
-        ReglesDuJeu().addStyle()
+        regles.addStyle()
 
         //Controleurs
 
