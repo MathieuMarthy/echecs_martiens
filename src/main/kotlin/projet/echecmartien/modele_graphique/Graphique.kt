@@ -1,5 +1,6 @@
 package projet.echecmartien.modele_graphique
 
+import javafx.scene.image.Image
 import projet.echecmartien.AppliJeuEchecMartien
 import java.io.File
 import java.lang.IllegalArgumentException
@@ -7,7 +8,7 @@ import java.lang.IllegalArgumentException
 class Graphique {
     public var joueur1 = JoueurGraphique()
     public var joueur2 = JoueurGraphique()
-    private var liste_pp: MutableList<String> = mutableListOf()
+    private var liste_pp: MutableList<Image> = mutableListOf()
     private var actuel = 0
 
     init {
@@ -21,7 +22,7 @@ class Graphique {
         this.liste_pp = mutableListOf()
         File(AppliJeuEchecMartien::class.java.getResource("pp/").file).walk().forEach {
             if (it.isFile) {
-                this.liste_pp.add(it.toString())
+                this.liste_pp.add(Image("file:" + it.toString()))
             }
         }
     }
@@ -47,7 +48,7 @@ class Graphique {
     /*
      * donne le chemin de l'image actuel
      */
-    fun getPPCourante(): String = this.liste_pp[this.actuel]
+    fun getPPCourante(): Image = this.liste_pp[this.actuel]
 
     /*
      * donne le numero de la pp
@@ -67,7 +68,7 @@ class Graphique {
     /*
      * retourne la liste des pp
      */
-    fun getListePP(): MutableList<String> = this.liste_pp
+    fun getListePP(): MutableList<Image> = this.liste_pp
 
     override fun toString(): String {
         return "$joueur1,\n$joueur2,\n$liste_pp"
