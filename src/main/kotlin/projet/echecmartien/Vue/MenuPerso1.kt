@@ -22,7 +22,7 @@ import projet.echecmartien.modele_graphique.Graphique
 public class MenuPerso1: GridPane() {
 
     var g1 = GridPane()
-    var h2 = HBox()
+
 
 
 
@@ -34,15 +34,12 @@ public class MenuPerso1: GridPane() {
     var champ_de_saisi: TextField = TextField()
     var photo_de_profil1: Label = Label("Photo de profil")
 
+    //CERCLE
     var cercle : Circle = Circle(100.0)
-    //var couleurs1: Label = Label("Couleurs")
-    //var couleurs2: Label = Label("Couleurs")
-    //var choix_de_couleur1:  ColorPicker = ColorPicker()
-    //var choix_de_couleur2:  ColorPicker = ColorPicker()
 
+    //BOUTONS
     var boutton2 = Button("Retour")
     var boutton1 = Button("Lancer")
-
 
     var right1 = Button(">")
     var right2 = Button(">")
@@ -50,8 +47,10 @@ public class MenuPerso1: GridPane() {
     var left1 = Button("<")
     var left2 = Button("<")
 
-    val fileChooser = FileChooser()
-    var testlabel = Label("")
+
+
+
+
 
     var graphique = Graphique()
 
@@ -73,10 +72,12 @@ public class MenuPerso1: GridPane() {
         photo_de_profil1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         //couleurs1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         //couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
+
+
+        //STYLE CHAMP DE SAISI (TEXT FIELD)
         champ_de_saisi.maxWidth = 300.0;
         champ_de_saisi.style = "-fx-text-fill: white ; -fx-font-size: 25;-fx-padding: 1,1,1,1;-fx-border-color: #A149FA;-fx-border-width: 2;-fx-border-radius: 1;-fx-border: gone;-fx-background-color: #1687ab;";
         champ_de_saisi.promptText = "Entrez votre Pseudo"
-
 
         right1.maxWidth = 100.0
 
@@ -85,22 +86,22 @@ public class MenuPerso1: GridPane() {
         //choix_de_couleur1.onAction = EventHandler{cercle.fill = choix_de_couleur1.value}
         //choix_de_couleur1.onAction = EventHandler{cercle.stroke = choix_de_couleur1.value}
 
-       // var test = ImageView(Image("C:\\Users\\tomas\\IdeaProjects\\eq_2_07_marthy-mathieu_martineau-tomas_nicou-fabien_vandemeulebroucke-bertin-nolan\\target\\classes\\projet\\echecmartien\\pp\\3_yeux_violets.png"))
+        // DIMENSION CERCLE POUR PP
         cercle.centerX = image_pp.fitHeight+150
         cercle.centerY = image_pp.fitWidth+150
         image_pp.fitHeight = 300.0
         image_pp.fitWidth = 300.0
-
-
         image_pp.clip = cercle
 
 
+
+        //GRILLE POUR SELECTION DE PP
         g1.padding = Insets(0.0,0.0,0.0,120.0)
         g1.add(left1,0,0)
         g1.add(image_pp,1,0)
         g1.add(right1,2,0)
-        println(testlabel)
 
+        // DIMENSION COLONNE + LIGNE
         val col0 = ColumnConstraints()
         col0.halignment = HPos.CENTER
         col0.percentWidth = 25.0
@@ -132,8 +133,9 @@ public class MenuPerso1: GridPane() {
         this.columnConstraints.addAll(col0, col1, col2)
         this.rowConstraints.addAll(ligne0, ligne1, ligne2, ligne3)
 
-        //choix_de_couleur1.prefWidth = 300.0
 
+
+        //AFFICHAGE DANS UNE GRILLE
         this.add(titre, 1, 0)
         this.add(pseudo1, 1, 1)
 

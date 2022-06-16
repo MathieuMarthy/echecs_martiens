@@ -37,9 +37,8 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
             if (this.jeu.deplacementPossible(this.oldPionSelected!!.getX(), this.oldPionSelected!!.getY(), y, x, this.jeu.getJoueurCourant())) {
                 // deplace le pion
                 this.jeu.deplacer(this.oldPionSelected!!.getX(), this.oldPionSelected!!.getY(), y, x)
-                println(this.jeu.getPlateau())
                 this.oldPionSelected = null
-
+                this.updatePlateau()
                 if (this.jeu.getJoueurCourant() is IA) {
                     this.jeu.IAjoue()
                 }
@@ -69,6 +68,8 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
         grille.grille.children.clear()
         grille.creationDamier()
         val plato = jeu.getPlateau().getCases()
+        this.grille.joueur2.text = jeu.joueurs[1].getPseudo()
+        this.grille.joueur1.text = jeu.joueurs[0].getPseudo()
 
         for ((i, ligne) in plato.withIndex()) {
             for ((j, case) in ligne.withIndex()) {
@@ -93,6 +94,6 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
                 }
             }
         }
-        ControleurScore(grille,jeu).updateScore()
+        ControleurScore(grille, jeu).updateScore()
     }
 }

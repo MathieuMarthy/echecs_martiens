@@ -21,59 +21,62 @@ import projet.echecmartien.modele.PetitPion
 
 class GrilleJeu : BorderPane(){
 
+    //Définition des éléments de la vue
     var grille : GridPane = GridPane()
 
+    //couleurs
     var couleur1 : String = "#f5000c"
     var nuance1 : String = "#F8916B"
-
     var couleur2 : String = "#243A73"
     var nuance2 : String = "#A5BECC"
 
+    //Elements sur les cotes et en haut
     val bandeauHaut = HBox()
     val grilleGauche = GridPane()
     var grilleDroite = GridPane()
-
     val gauche = VBox()
     val droite = VBox()
-    //val logoJ1 : ImageView
-    //val logoJ2 : ImageView
+    val quitter = Button("Quitter")
+    val regles = Button("Règles")
+    val ff = Button("Rejouer")
 
+    //Infos J1 & 2
     var joueur1 = Label("Fabeek")
     var nbPetitJ1 = 0
     var nbMoyenJ1 = 0
     var nbGrandJ1 = 0
-
     var joueur2 = Label("Masto")
     var nbPetitJ2 = 0
     var nbMoyenJ2 = 0
     var nbGrandJ2 = 0
 
+    //Images
     var MenuPerso2 = MenuPerso2()
-
     var imagedroite = ImageView()
     var imagegauche = ImageView()
 
-    val quitter = Button("Quitter")
-    val regles = Button("Règles")
-    val ff = Button("Rejouer")
-
 
     init{
+        //Update de la vue
         creationDamier()
-        //Positionnement
+        updateScoreboard(nbPetitJ1,nbMoyenJ1,nbGrandJ1,nbPetitJ2,nbMoyenJ2,nbGrandJ2)
+
+
+        //Positionnement de la grille plateau de jeu
         this.center = grille
         grille.alignment = Pos.CENTER
 
-
+        //Elements de gauche
         gauche.alignment = Pos.BOTTOM_CENTER
         grilleGauche.vgap = 30.0
+        imagegauche = this.MenuPerso2.image_pp2
         this.left = gauche
 
         imagedroite = MenuPerso2.image_pp
 
-        gauche.children.addAll(imagedroite, joueur1,grilleGauche)
 
-        updateScoreboard(nbPetitJ1,nbMoyenJ1,nbGrandJ1,nbPetitJ2,nbMoyenJ2,nbGrandJ2)
+        droite.children.addAll(imagegauche,joueur2,grilleDroite)
+        gauche.children.addAll(imagedroite, joueur1,grilleGauche)
 
 
         droite.alignment = Pos.BOTTOM_CENTER
@@ -82,14 +85,12 @@ class GrilleJeu : BorderPane(){
         droite.spacing = 50.0
         gauche.spacing = 50.0
         this.right = droite
-        imagegauche = this.MenuPerso2.image_pp2
 
 
-        droite.children.addAll(imagegauche,joueur2,grilleDroite)
         grilleDroite.vgap = 30.0
 
 
-        var bandeauHautGauche = HBox()
+        val bandeauHautGauche = HBox()
         bandeauHautGauche.children.addAll(quitter,regles)
         bandeauHaut.children.addAll(bandeauHautGauche,ff)
         this.top = bandeauHaut

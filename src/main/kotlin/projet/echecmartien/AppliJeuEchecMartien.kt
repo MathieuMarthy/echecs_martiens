@@ -8,8 +8,7 @@ import javafx.scene.control.ButtonType
 import javafx.stage.Screen
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
-import projet.echecmartien.controleur.ControleurLancerMenu1
-import projet.echecmartien.controleur.ControleurLancerMenu2
+import projet.echecmartien.controleur.*
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.modele.Joueur
 
@@ -20,8 +19,6 @@ class AppliJeuEchecMartien: Application() {
         //Initialisation des variables
         val vue = MainVue()
         val grille = GrilleJeu()
-        val charger = Charger()
-        val sauvegarder = Charger()
         val nombreJoueurs = NombreJoueurs()
         val MenuPerso1 = MenuPerso1()
         val MenuPerso2 = MenuPerso2()
@@ -41,8 +38,6 @@ class AppliJeuEchecMartien: Application() {
         sceneMenu.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
         nombreJoueurs.addStyle()
         vue.addStyle()
-        charger.addStyle()
-        sauvegarder.addStyle()
         grille.addStyle()
         MenuPerso1.addStyle()
         MenuPerso2.addStyle()
@@ -61,7 +56,7 @@ class AppliJeuEchecMartien: Application() {
         nombreJoueurs.retour.onAction = EventHandler { primaryStage.scene.root = vue }
 
         //ChargerPartie
-        vue.boutonLoad.onAction = EventHandler { primaryStage.scene.root = charger }
+        vue.boutonLoad.onAction = ControleurStartCharger(primaryStage, jeu, vue, grille)
 
         //Nombre de joueur boutons
         nombreJoueurs.joueur1.onAction = ControleurLancerMenu1(MenuPerso1, primaryStage, grille, jeu, nombreJoueurs)
@@ -74,23 +69,6 @@ class AppliJeuEchecMartien: Application() {
         // Règles Bouton
         regles.boutonRetour.onAction = EventHandler { primaryStage.scene.root = vue }
         regles2.boutonRetour.onAction = EventHandler { primaryStage.scene.root = grille }
-
-        // controleur sauvegarde
-        //charger.nouveau1.onAction = ControleurSauvgarde()
-        charger.nouveau1.onAction = EventHandler { jeu.chargerPartie("1") ; sauvegarder.nouveau1.text = "Partie 1: 1"}
-        charger.nouveau2.onAction = EventHandler { jeu.chargerPartie("2") ; sauvegarder.nouveau1.text = "Partie 1: 2"}
-        charger.nouveau3.onAction = EventHandler { jeu.chargerPartie("3") ; sauvegarder.nouveau1.text = "Partie 1: 3"}
-        charger.nouveau4.onAction = EventHandler { jeu.chargerPartie("4") ; sauvegarder.nouveau1.text = "Partie 1: 4"}
-        charger.nouveau5.onAction = EventHandler { primaryStage.scene.root = vue }
-
-        // ----------------------- A FAIRE SI ON PEUX | sauvegarder.nouveau1.text = grille.joueur1.text + " vs " + grille.joueur2.text
-
-        // sauvegarder
-        sauvegarder.nouveau1.onAction = EventHandler { jeu.sauvegarderPartie("1") ; sauvegarder.nouveau1.text = "Partie 1: 1"}
-        sauvegarder.nouveau2.onAction = EventHandler { jeu.sauvegarderPartie("2") ; sauvegarder.nouveau2.text = "Partie 1: 2"}
-        sauvegarder.nouveau3.onAction = EventHandler { jeu.sauvegarderPartie("3") ; sauvegarder.nouveau3.text = "Partie 1: 3"}
-        sauvegarder.nouveau4.onAction = EventHandler { jeu.sauvegarderPartie("4") ; sauvegarder.nouveau4.text = "Partie 1: 4"}
-        sauvegarder.nouveau5.onAction = EventHandler { primaryStage.scene.root = vue }
 
 
         // bouton "Quitter" sur la grille et fait apparaître un pop up
@@ -110,31 +88,21 @@ class AppliJeuEchecMartien: Application() {
             // ce que font les boutons
             val result = popup.showAndWait()
             if (result.get() == bouton_oui) {           // bouton menant au menu de sauvegarde
-                primaryStage.scene.root = sauvegarder
-            }else if (result.get() == bouton_non){      // bouton menant au menu principal
+                ControleurStartSauvegarder(primaryStage, jeu, vue, grille).handle(null)
+            } else if (result.get() == bouton_non){      // bouton menant au menu principal
                 primaryStage.scene.root = vue
-            }else if (result.get() == bouton_annuler) { // bouton faisant revenir sur la grille
+            } else if (result.get() == bouton_annuler) { // bouton faisant revenir sur la grille
                 primaryStage.scene.root = grille
             }
         }
 
         // bouton "Rejouer" sur la grille
         grille.ff.onAction = EventHandler {
+            // initialise le plateau avec les mêmes pseudos
             jeu.initialiserPartie(Joueur(jeu.joueurs[0].getPseudo()), Joueur(jeu.joueurs[1].getPseudo()), 5)
+            // update le plateau
+            ControleurCoupsPossibles(jeu, grille).updatePlateau()
         }
-
-        // pop up de victoire
-//        var popupVictoire: Alert = Alert(Alert.AlertType.CONFIRMATION)
-//        popupVictoire.title = "Résultats de la partie"
-//        popupVictoire.headerText = "Bravo ${jeu.joueurVainqueur()} tu es trop fort, on devrait faire une statue à votre effigie."
-//        popupVictoire.contentText = "Refaire une partie ?"
-
-//        var bouton_menu : ButtonType = ButtonType("Retour au menu")
-//        popup.getButtonTypes().setAll(bouton_menu)
-//        val resultat_victoire = popupVictoire.showAndWait()
-//        if (resultat_victoire.get() == bouton_menu){
-//            primaryStage.scene.root = vue
-//        }
 
         // switch image PP + Image PP grille
         //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
@@ -150,12 +118,9 @@ class AppliJeuEchecMartien: Application() {
         MenuPerso2.right2.onAction = EventHandler { MenuPerso2.graphique2.ppSuivante(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante(); grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante()}
         MenuPerso2.left2.onAction = EventHandler { MenuPerso2.graphique2.ppPrecedente(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante() ; grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante() }
 
-        MenuPerso1.fileChooser.title = "Open File"
-        MenuPerso1.testlabel.text = MenuPerso1.fileChooser.initialFileName
-
         //Lancer partie
         MenuPerso1.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
-        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,primaryStage)
+        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu, MenuPerso1, grille, primaryStage)
 
         //Mise en place de la scène
         primaryStage.title = "Echecs Martiens"

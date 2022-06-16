@@ -9,20 +9,16 @@ import projet.echecmartien.controleur.ControleurCoupsPossibles
 import projet.echecmartien.modele.*
 
 
-class ControleurInit2J(jeu : Jeu, menuPerso2: MenuPerso2, grilleJeu: GrilleJeu, stage: Stage):EventHandler<ActionEvent>{
+class ControleurInit2JBis(jeu : Jeu, grilleJeu: GrilleJeu, stage: Stage, numeroSauvegarde: String): EventHandler<ActionEvent> {
 
     var jeu = jeu
-    var menuPerso2 = menuPerso2
     var grille = grilleJeu
     var stage = stage
     var controleur = ControleurCoupsPossibles(jeu, grille)
+    var numeroSauvegarde = numeroSauvegarde
 
     override fun handle(p0: ActionEvent?) {
-
-        jeu.initialiserPartie(Joueur(menuPerso2.champ_de_saisi.text), Joueur(menuPerso2.champ_de_saisi2.text), 5)
-
-        grille.joueur1.text = menuPerso2.champ_de_saisi.text
-        grille.joueur2.text = menuPerso2.champ_de_saisi2.text
+        this.jeu.chargerPartie(numeroSauvegarde)
 
         stage.scene.root = grille
         this.controleur.updatePlateau()

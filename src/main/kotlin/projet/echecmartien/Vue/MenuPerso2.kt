@@ -39,10 +39,6 @@ public class MenuPerso2: GridPane() {
     var cercle : Circle = Circle(100.0)
     var cercle2 : Circle = Circle(100.0)
 
-    //var couleurs1: Label = Label("Couleurs")
-    //var couleurs2: Label = Label("Couleurs")
-    //var choix_de_couleur1:  ColorPicker = ColorPicker()
-    //var choix_de_couleur2:  ColorPicker = ColorPicker()
 
     var boutton2 = Button("Retour")
     var boutton1 = Button("Lancer")
@@ -54,8 +50,7 @@ public class MenuPerso2: GridPane() {
     var left1 = Button("<")
     var left2 = Button("<")
 
-    val fileChooser = FileChooser()
-    var testlabel = Label("")
+
 
     var graphique = Graphique()
     var graphique2 = Graphique2()
@@ -177,12 +172,6 @@ public class MenuPerso2: GridPane() {
         val ligne4 = RowConstraints()
         ligne2.valignment = VPos.BASELINE
         ligne2.percentHeight = 25.0
-
-
-
-
-
-
 
         this.columnConstraints.addAll(col0, col1, col2)
         this.rowConstraints.addAll(ligne0, ligne1, ligne2, ligne3,ligne4)
