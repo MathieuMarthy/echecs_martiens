@@ -5,7 +5,9 @@ import javafx.event.EventHandler
 import javafx.geometry.HPos
 import javafx.scene.Scene
 import javafx.scene.layout.GridPane
+import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
+import javafx.scene.shape.Rectangle
 import javafx.stage.Stage
 import projet.echecmartien.Vue.GrilleJeu
 import projet.echecmartien.Vue.MenuPerso1
@@ -33,11 +35,18 @@ class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, s
                     is PetitPion -> Circle(30.0)
                     is MoyenPion -> Circle(40.0)
                     is GrandPion -> Circle(50.0)
-                    else -> null
+                    else -> Rectangle(110.0,110.0)
                 }
-                if (cercle != null){
-                    cercle.onMouseClicked = EventHandler { ControleurCoupsPossibles(j,i,jeu,grille).afficherCoupsPossibles() }
-                    grille.grille.add(cercle,j,i)
+                if (cercle !is Rectangle){
+                    cercle.onMouseClicked = this.controleur
+                    grille.grille.add(cercle, j, i)
+                    cercle.toFront()
+                    GridPane.setHalignment(cercle, HPos.CENTER)
+                } else{
+                    cercle.onMouseClicked = this.controleur
+                    cercle.style = "-fx-fill:rgba(245, 39, 145, 0);"
+                    grille.grille.add(cercle, j, i)
+                    cercle.toFront()
                     GridPane.setHalignment(cercle, HPos.CENTER)
                 }
             }

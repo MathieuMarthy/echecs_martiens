@@ -51,14 +51,30 @@ class GrilleJeu : BorderPane(){
     init{
         for (nbLignes in 0 until 8){
             for (nbColonnes in 0 until 4){
-                var stack = StackPane()
                 val case = Rectangle(110.0,110.0)
-
-                stack.children.add(case)
-                grille.add(stack,nbColonnes,nbLignes)
+                case.toBack()
+                grille.add(case,nbColonnes,nbLignes)
             }
         }
-        creationDamier()
+        //Création du damier
+        for (nbLignes in 0 until 8){
+            for (nbColonnes in 0 until 4){
+                if (nbLignes <=3){
+                    if ((nbColonnes+nbLignes)%2==1){
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }else{
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }
+                }
+                else{
+                    if ((nbColonnes+nbLignes)%2==1){
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }else{
+                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }
+                }
+            }
+        }
 
         //Positionnement
         this.center = grille
@@ -129,27 +145,6 @@ class GrilleJeu : BorderPane(){
         this.right.styleClass.add("texteGrille")
     }
 
-    fun creationDamier(){
-        //Création du damier
-        for (nbLignes in 0 until 8){
-            for (nbColonnes in 0 until 4){
-                if (nbLignes <=3){
-                    if ((nbColonnes+nbLignes)%2==1){
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }else{
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }
-                }
-                else{
-                    if ((nbColonnes+nbLignes)%2==1){
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }else{
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }
-                }
-            }
-        }
-    }
 
 
 
