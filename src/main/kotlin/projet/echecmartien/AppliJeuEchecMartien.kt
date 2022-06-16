@@ -78,11 +78,13 @@ class AppliJeuEchecMartien: Application() {
         var popup: Alert = Alert(Alert.AlertType.CONFIRMATION)
 
         grille.quitter.onAction = EventHandler {
-            popup.title = "Quitter la partie ?" ;
-            popup.headerText = "Voulez-vous vraiment quitter la partie ?" ;
+            popup.title = "Quitter la partie ?";
+            popup.headerText = "Voulez-vous vraiment quitter la partie ?";
             popup.contentText = "Quitter la partie vous mènera à un menu de sauvegarde. Continuer ?";
-            popup.showAndWait()
-            /*resultat.ifPresent {popup.onCloseRequest. }*/
+            val result = popup.showAndWait()
+            if (result.get() == ButtonType.OK) {
+                primaryStage.scene.root = charger
+            }
         }
 
         // switch image PP + Image PP grille
