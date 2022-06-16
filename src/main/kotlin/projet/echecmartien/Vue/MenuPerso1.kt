@@ -32,7 +32,7 @@ public class MenuPerso1: GridPane() {
     var pseudo2: Label = Label("Pseudo")
     var labelJoueur1: Label = Label("Joueur 1")
     var labelJoueur2: Label = Label("Joueur 2")
-    var champ_de_saisi: TextField = TextField("Entrez votre pseudo")
+    var champ_de_saisi: TextField = TextField()
     var photo_de_profil1: Label = Label("Photo de profil")
 
     var cercle : Circle = Circle(100.0)
@@ -103,22 +103,6 @@ public class MenuPerso1: GridPane() {
         g1.add(right1,2,0)
         println(testlabel)
 
-
-
-
-
-
-
-
-
-
-
-        /*choix_de_couleur1.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        choix_de_couleur2.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        champ_de_saisi1.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        champ_de_saisi2.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))*/
-
-
         val col0 = ColumnConstraints()
         col0.halignment = HPos.CENTER
         col0.percentWidth = 25.0
@@ -147,18 +131,10 @@ public class MenuPerso1: GridPane() {
         ligne2.valignment = VPos.BASELINE
         ligne2.percentHeight = 40.0
 
-
-
-
-
-
-
         this.columnConstraints.addAll(col0, col1, col2)
         this.rowConstraints.addAll(ligne0, ligne1, ligne2, ligne3)
 
         //choix_de_couleur1.prefWidth = 300.0
-
-
 
         this.add(titre, 1, 0)
         this.add(pseudo1, 1, 1)
@@ -171,11 +147,6 @@ public class MenuPerso1: GridPane() {
         this.add(photo_de_profil1, 2, 1)
         this.add(g1, 2, 2)
 
-
-        //this.add(couleurs1, 3, 1)
-        //this.add(couleurs2, 3, 1)
-
-
         this.add(boutton1, 1,3)
         this.add(boutton2, 2,3)
 
@@ -184,8 +155,6 @@ public class MenuPerso1: GridPane() {
 
     }
     fun addStyle(){
-        //choix_de_couleur1.styleClass.add("")
-        //choix_de_couleur2.styleClass.add("")
 
         this.styleClass.add("textfield")
         this.styleClass.add("boutons4")
