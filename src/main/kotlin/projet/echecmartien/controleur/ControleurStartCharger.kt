@@ -13,7 +13,7 @@ import projet.echecmartien.Vue.MainVue
 import projet.echecmartien.modele.Jeu
 import java.io.FileReader
 
-class ControleurStartCharger(private var primaryStage: Stage , private var jeu: Jeu, private var home: MainVue, private var grille : GrilleJeu): EventHandler<ActionEvent> {
+class ControleurStartCharger(private var primaryStage: Stage , private var jeu: Jeu, private var home: MainVue, private var grille : GrilleJeu, var main : MainVue): EventHandler<ActionEvent> {
 
     override fun handle(p0: ActionEvent?) {
         val charger = Charger()
@@ -29,10 +29,10 @@ class ControleurStartCharger(private var primaryStage: Stage , private var jeu: 
             println(json["title"].asString)
         }
 
-        charger.nouveau1.onAction = ControleurInit2JBis(jeu, grille, primaryStage, "1")
-        charger.nouveau2.onAction = ControleurInit2JBis(jeu, grille, primaryStage, "2")
-        charger.nouveau3.onAction = ControleurInit2JBis(jeu, grille, primaryStage,"3")
-        charger.nouveau4.onAction = ControleurInit2JBis(jeu, grille, primaryStage, "4")
+        charger.nouveau1.onAction = ControleurInit2JBis(jeu, grille, primaryStage, "1",main)
+        charger.nouveau2.onAction = ControleurInit2JBis(jeu, grille, primaryStage, "2",main)
+        charger.nouveau3.onAction = ControleurInit2JBis(jeu, grille, primaryStage,"3",main)
+        charger.nouveau4.onAction = ControleurInit2JBis(jeu, grille, primaryStage, "4",main)
         charger.nouveau5.onAction = EventHandler { primaryStage.scene.root = home }
     }
 }

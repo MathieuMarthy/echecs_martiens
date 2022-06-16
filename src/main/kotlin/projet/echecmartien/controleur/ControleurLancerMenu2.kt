@@ -5,13 +5,10 @@ import javafx.event.EventHandler
 import javafx.stage.Stage
 import projet.echecmartien.ControleurInit1J
 import projet.echecmartien.ControleurInit2J
-import projet.echecmartien.Vue.GrilleJeu
-import projet.echecmartien.Vue.MenuPerso1
-import projet.echecmartien.Vue.MenuPerso2
-import projet.echecmartien.Vue.NombreJoueurs
+import projet.echecmartien.Vue.*
 import projet.echecmartien.modele.Jeu
 
-class ControleurLancerMenu2(private var menu: MenuPerso2, private var primaryStage: Stage, private var grille : GrilleJeu, private var jeu: Jeu, private var nombreJoueurs: NombreJoueurs): EventHandler<ActionEvent> {
+class ControleurLancerMenu2(private var menu: MenuPerso2, private var primaryStage: Stage, private var grille : GrilleJeu, private var jeu: Jeu, private var nombreJoueurs: NombreJoueurs, private var main : MainVue): EventHandler<ActionEvent> {
 
     override fun handle(p0: ActionEvent?) {
         menu = MenuPerso2()
@@ -25,6 +22,6 @@ class ControleurLancerMenu2(private var menu: MenuPerso2, private var primarySta
         menu.left2.onAction = EventHandler { menu.graphique2.ppPrecedente(); menu.image_pp2.image = menu.graphique2.getPPCourante() ;grille.imagegauche.image = menu.graphique2.getPPCourante()}
 
         menu.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
-        menu.boutton1.onAction = ControleurInit2J(jeu, menu, grille, primaryStage)
+        menu.boutton1.onAction = ControleurInit2J(jeu, menu, grille, primaryStage,main)
     }
 }

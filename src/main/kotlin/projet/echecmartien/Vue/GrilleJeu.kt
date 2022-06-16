@@ -98,7 +98,6 @@ class GrilleJeu : BorderPane(){
         bandeauHaut.alignment = Pos.CENTER
         bandeauHaut.spacing = 1300.0
 
-
     }
 
     fun addStyle(){

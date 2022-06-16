@@ -8,6 +8,10 @@ import javafx.scene.control.ButtonType
 import javafx.stage.Screen
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
+import projet.echecmartien.controleur.ControleurCoupsPossibles
+import projet.echecmartien.controleur.ControleurLancerMenu1
+import projet.echecmartien.controleur.ControleurLancerMenu2
+import projet.echecmartien.modele.IA
 import projet.echecmartien.controleur.*
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.modele.Joueur
@@ -56,11 +60,11 @@ class AppliJeuEchecMartien: Application() {
         nombreJoueurs.retour.onAction = EventHandler { primaryStage.scene.root = vue }
 
         //ChargerPartie
-        vue.boutonLoad.onAction = ControleurStartCharger(primaryStage, jeu, vue, grille)
+        vue.boutonLoad.onAction = ControleurStartCharger(primaryStage, jeu, vue, grille,vue)
 
         //Nombre de joueur boutons
-        nombreJoueurs.joueur1.onAction = ControleurLancerMenu1(MenuPerso1, primaryStage, grille, jeu, nombreJoueurs)
-        nombreJoueurs.joueur2.onAction = ControleurLancerMenu2(MenuPerso2, primaryStage, grille, jeu, nombreJoueurs)
+        nombreJoueurs.joueur1.onAction = ControleurLancerMenu1(MenuPerso1, primaryStage, grille, jeu, nombreJoueurs,vue)
+        nombreJoueurs.joueur2.onAction = ControleurLancerMenu2(MenuPerso2, primaryStage, grille, jeu, nombreJoueurs,vue)
 
         //Grille Boutons
         grille.regles.onAction = EventHandler { primaryStage.scene.root = regles2 }
@@ -98,11 +102,15 @@ class AppliJeuEchecMartien: Application() {
 
         // bouton "Rejouer" sur la grille
         grille.ff.onAction = EventHandler {
-            // initialise le plateau avec les mêmes pseudos
-            jeu.initialiserPartie(Joueur(jeu.joueurs[0].getPseudo()), Joueur(jeu.joueurs[1].getPseudo()), 5)
-            // update le plateau
-            ControleurCoupsPossibles(jeu, grille).updatePlateau()
+            if (jeu.joueurs[1] is IA){
+                jeu.initialiserPartie(Joueur(jeu.joueurs[0].getPseudo()), IA(jeu.joueurs[1].getPseudo(),jeu), 5)
+            }else{
+                jeu.initialiserPartie(Joueur(jeu.joueurs[0].getPseudo()), Joueur(jeu.joueurs[1].getPseudo()), 5)
+            }
+            ControleurCoupsPossibles(jeu, grille,primaryStage,vue).updatePlateau()
         }
+
+
 
         // switch image PP + Image PP grille
         //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
@@ -120,7 +128,7 @@ class AppliJeuEchecMartien: Application() {
 
         //Lancer partie
         MenuPerso1.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
-        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu, MenuPerso1, grille, primaryStage)
+        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,primaryStage,vue)
 
         //Mise en place de la scène
         primaryStage.title = "Echecs Martiens"

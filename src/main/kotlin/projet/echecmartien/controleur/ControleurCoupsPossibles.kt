@@ -7,17 +7,21 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
+import javafx.stage.Stage
 import projet.echecmartien.Vue.GrilleJeu
+import projet.echecmartien.Vue.MainVue
 import projet.echecmartien.modele.*
 import java.util.concurrent.TimeUnit
 
-class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<MouseEvent> {
+class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu,stage: Stage,main:MainVue): EventHandler<MouseEvent> {
 
     var jeu = jeu
     var grille = grilleJeu
     var oldPionSelected: Coordonnee? = null
     var listeRectangleVerts: MutableList<Rectangle> = mutableListOf()
     var listeStyle: MutableList<String> = mutableListOf()
+    var stage = stage
+    var vue = main
 
     override fun handle(event: MouseEvent?) {
         //Récupère le node sur lequel on clique
@@ -44,7 +48,6 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
                 }
                 this.updatePlateau()
                 return
-
             }
 
         }
@@ -94,6 +97,7 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
                 }
             }
         }
-        ControleurScore(grille, jeu).updateScore()
+        ControleurScore(grille,jeu).updateScore()
+        ControleurFinPartie(jeu,grille,stage,vue).finPartie()
     }
 }

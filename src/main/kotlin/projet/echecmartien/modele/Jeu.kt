@@ -20,9 +20,9 @@ public class Jeu(): InterfaceJeu {
     private var pionArriveDeZone: Pion? = null
 
     // Classe
-    private var statut: Boolean = false
+    var statut: Boolean = false
     private var nombreCoupsSansPriseMax = 5
-    private var nombreCoupsSansPrise = 0
+    var nombreCoupsSansPrise = 0
 
     // utile
     var sauvegardes: MutableList<String> = mutableListOf()
@@ -113,6 +113,8 @@ public class Jeu(): InterfaceJeu {
                 }
             }
 
+        nombreCoupsSansPrise = 0
+
         this.nombreCoupsSansPriseMax = nombreCoupsSansPriseMax
     }
 
@@ -127,7 +129,6 @@ public class Jeu(): InterfaceJeu {
                     return true
             }
         }
-
         return false
     }
 
@@ -193,15 +194,20 @@ public class Jeu(): InterfaceJeu {
 
         if (arrivee.getPion() != null) {
             this.joueurCourant.ajouterPionCaptures(arrivee.getPion()!!)
+            nombreCoupsSansPrise = 0
         } else {
             this.nombreCoupsSansPrise++
-
-            if (this.nombreCoupsSansPrise == this.nombreCoupsSansPriseMax ) {
-                this.statut = false
-            }
         }
         arrivee.setPion(depart.getPion())
         depart.setPion(null)
+
+        println(nombreCoupsSansPrise)
+        println("#####")
+        println(plateauVideUnCote())
+        if (this.nombreCoupsSansPrise == this.nombreCoupsSansPriseMax || plateauVideUnCote() ) {
+            this.statut = false
+            println("###################### fin #####################")
+        }
 
         if (depart.getJoueur() != arrivee.getJoueur()) {
             this.pionArriveDeZone = arrivee.getPion()
@@ -211,6 +217,23 @@ public class Jeu(): InterfaceJeu {
 
         this.changeJoueurCourant()
      }
+
+    fun plateauVideUnCote():Boolean{
+        for ( joueur in joueurs ){
+            var pions : Int = 0
+            for (ligne in getPlateau().getCases()){
+                for (case in ligne){
+                    if (!case.estLibre() && case.getJoueur() == joueur){
+                        pions++
+                    }
+                }
+            }
+            if (pions == 0){
+                return true
+            }
+        }
+        return false
+    }
 
     override fun joueurVainqueur(): Joueur? {
         this.statut = false
@@ -352,7 +375,6 @@ public class Jeu(): InterfaceJeu {
 
         }
     }
-
 
 
 }

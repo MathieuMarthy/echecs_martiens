@@ -4,18 +4,20 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.stage.Stage
 import projet.echecmartien.Vue.GrilleJeu
+import projet.echecmartien.Vue.MainVue
 import projet.echecmartien.Vue.MenuPerso2
 import projet.echecmartien.controleur.ControleurCoupsPossibles
 import projet.echecmartien.modele.*
 
 
-class ControleurInit2J(jeu : Jeu, menuPerso2: MenuPerso2, grilleJeu: GrilleJeu, stage: Stage):EventHandler<ActionEvent>{
+class ControleurInit2J(jeu : Jeu, menuPerso2: MenuPerso2, grilleJeu: GrilleJeu, stage: Stage, main : MainVue):EventHandler<ActionEvent>{
 
     var jeu = jeu
     var menuPerso2 = menuPerso2
     var grille = grilleJeu
     var stage = stage
-    var controleur = ControleurCoupsPossibles(jeu, grille)
+    var vue = main
+    var controleur = ControleurCoupsPossibles(jeu, grille,stage,vue)
 
     override fun handle(p0: ActionEvent?) {
 
