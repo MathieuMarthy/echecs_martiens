@@ -11,7 +11,6 @@ import javafx.scene.control.TextField
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.*
-import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
@@ -94,7 +93,6 @@ public class MenuPerso1: GridPane() {
 
 
         image_pp.clip = cercle
-
 
 
         g1.padding = Insets(0.0,0.0,0.0,120.0)
