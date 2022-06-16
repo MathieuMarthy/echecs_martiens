@@ -87,9 +87,9 @@ class AppliJeuEchecMartien: Application() {
 
         // sauvegarder
         sauvegarder.nouveau1.onAction = EventHandler { jeu.sauvegarderPartie("1") ; sauvegarder.nouveau1.text = "Partie 1: 1"}
-        sauvegarder.nouveau2.onAction = EventHandler { jeu.sauvegarderPartie("2") ; sauvegarder.nouveau1.text = "Partie 1: 2"}
-        sauvegarder.nouveau3.onAction = EventHandler { jeu.sauvegarderPartie("3") ; sauvegarder.nouveau1.text = "Partie 1: 3"}
-        sauvegarder.nouveau4.onAction = EventHandler { jeu.sauvegarderPartie("4") ; sauvegarder.nouveau1.text = "Partie 1: 4"}
+        sauvegarder.nouveau2.onAction = EventHandler { jeu.sauvegarderPartie("2") ; sauvegarder.nouveau2.text = "Partie 1: 2"}
+        sauvegarder.nouveau3.onAction = EventHandler { jeu.sauvegarderPartie("3") ; sauvegarder.nouveau3.text = "Partie 1: 3"}
+        sauvegarder.nouveau4.onAction = EventHandler { jeu.sauvegarderPartie("4") ; sauvegarder.nouveau4.text = "Partie 1: 4"}
         sauvegarder.nouveau5.onAction = EventHandler { primaryStage.scene.root = vue }
 
 
