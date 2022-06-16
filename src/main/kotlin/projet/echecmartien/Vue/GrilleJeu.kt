@@ -92,7 +92,7 @@ class GrilleJeu : BorderPane(){
         rayon = 30.0
         for (i in 0 until 3){
             val pionModele = Circle(rayon)
-            pionModele.style = "-fx-fill: $couleur2;"
+            pionModele.style = "-fx-fill: $nuance2;"
             grilleDroite.add(pionModele,0,i)
             rayon+=10.0
         }

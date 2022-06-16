@@ -145,7 +145,6 @@ class AppliJeuEchecMartien: Application() {
         MenuPerso1.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
         MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,primaryStage)
 
-
         //Mise en place de la scène
         primaryStage.title = "Echecs Martiens"
         primaryStage.scene = sceneMenu
