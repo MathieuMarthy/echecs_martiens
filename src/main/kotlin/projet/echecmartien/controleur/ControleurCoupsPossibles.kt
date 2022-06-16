@@ -1,16 +1,17 @@
 package projet.echecmartien.controleur
 
 import javafx.event.EventHandler
+import javafx.geometry.HPos
 import javafx.scene.Node
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
 import projet.echecmartien.Vue.GrilleJeu
-import projet.echecmartien.modele.Coordonnee
-import projet.echecmartien.modele.Jeu
+import projet.echecmartien.modele.*
+import java.util.concurrent.TimeUnit
 
-class ControleurCoupsPossibles(jeu:Jeu, grilleJeu : GrilleJeu): EventHandler<MouseEvent> {
+class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<MouseEvent> {
 
     var jeu = jeu
     var grille = grilleJeu
@@ -33,15 +34,22 @@ class ControleurCoupsPossibles(jeu:Jeu, grilleJeu : GrilleJeu): EventHandler<Mou
 
         if (this.oldPionSelected != null) {
 
-            if (this.jeu.deplacementPossible(this.oldPionSelected!!.getX(), this.oldPionSelected!!.getY(), x, y, this.jeu.getJoueurCourant())) {
+            if (this.jeu.deplacementPossible(this.oldPionSelected!!.getX(), this.oldPionSelected!!.getY(), y, x, this.jeu.getJoueurCourant())) {
                 // deplace le pion
-                this.jeu.deplacer(this.oldPionSelected!!.getY(), this.oldPionSelected!!.getX(), y, x)
+                this.jeu.deplacer(this.oldPionSelected!!.getX(), this.oldPionSelected!!.getY(), y, x)
                 println(this.jeu.getPlateau())
                 this.oldPionSelected = null
+
+                if (this.jeu.getJoueurCourant() is IA) {
+                    this.jeu.IAjoue()
+                }
+                this.updatePlateau()
+                return
+
             }
 
         }
-        this.oldPionSelected = Coordonnee(x, y)
+        this.oldPionSelected = Coordonnee(y, x)
     }
 
     fun colore(y: Int, x: Int) {
