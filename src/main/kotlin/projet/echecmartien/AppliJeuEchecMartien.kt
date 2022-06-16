@@ -77,6 +77,10 @@ class AppliJeuEchecMartien: Application() {
         //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
         MenuPerso1.right1.onAction = EventHandler {MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
         MenuPerso1.left1.onAction = EventHandler {MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
+
+        MenuPerso2.right2.onAction = EventHandler {MenuPerso2.graphique2.ppSuivante(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante()}
+        MenuPerso2.left2.onAction = EventHandler {MenuPerso2.graphique2.ppPrecedente(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante()}
+
         MenuPerso1.fileChooser.title = "Open File"
         MenuPerso1.testlabel.text = MenuPerso1.fileChooser.initialFileName
 
