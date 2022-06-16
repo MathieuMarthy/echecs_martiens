@@ -229,6 +229,7 @@ public class Jeu(): InterfaceJeu {
     fun getPlateau(): Plateau = this.plateau
 
     fun sauvegarderPartie(numeroSauvegarde: String) {
+        println("sa")
 
         // création du json
         var string_json = "{"
