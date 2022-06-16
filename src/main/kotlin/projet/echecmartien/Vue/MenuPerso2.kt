@@ -88,7 +88,6 @@ public class MenuPerso2: GridPane() {
 
 
 
-        right1.maxWidth = 100.0
 
 
         //cercle.fill = Color.WHITE

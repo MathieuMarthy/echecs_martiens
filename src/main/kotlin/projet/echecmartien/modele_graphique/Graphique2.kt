@@ -8,7 +8,7 @@ import java.lang.IllegalArgumentException
 class Graphique2 {
     public var joueur1 = JoueurGraphique()
     public var joueur2 = JoueurGraphique()
-    private var liste_pp: MutableList<Image> = mutableListOf()
+    private var liste_pp2: MutableList<Image> = mutableListOf()
     private var actuel = 0
 
     init {
@@ -19,10 +19,10 @@ class Graphique2 {
      * recharge toutes les pp qui sont dans le dossier
      */
     fun refreshPP() {
-        this.liste_pp = mutableListOf()
+        this.liste_pp2 = mutableListOf()
         File(AppliJeuEchecMartien::class.java.getResource("pp/").file).walk().forEach {
             if (it.isFile) {
-                this.liste_pp.add(Image("file:" + it.toString()))
+                this.liste_pp2.add(Image("file:" + it.toString()))
             }
         }
     }
@@ -32,7 +32,7 @@ class Graphique2 {
      */
     fun ppSuivante() {
         this.actuel += 1
-        if (this.actuel > this.liste_pp.size - 1)
+        if (this.actuel > this.liste_pp2.size - 1)
             this.actuel = 0
     }
 
@@ -42,13 +42,13 @@ class Graphique2 {
     fun ppPrecedente() {
         this.actuel -= 1
         if (this.actuel < 0)
-            this.actuel = this.liste_pp.size - 1
+            this.actuel = this.liste_pp2.size - 1
     }
 
     /*
      * donne le chemin de l'image actuel
      */
-    fun getPPCourante(): Image = this.liste_pp[this.actuel]
+    fun getPPCourante(): Image = this.liste_pp2[this.actuel]
 
     /*
      * donne le numero de la pp
@@ -59,7 +59,7 @@ class Graphique2 {
      * met la pp numero-ième en courant
      */
     fun setCourant(numero: Int) {
-        if (numero > this.liste_pp.size || numero < 0) {
+        if (numero > this.liste_pp2.size || numero < 0) {
             throw IllegalArgumentException("Le numero doit etre entre 0 et le nombre de pp - 1")
         }
         this.actuel = numero
@@ -68,9 +68,9 @@ class Graphique2 {
     /*
      * retourne la liste des pp
      */
-    fun getListePP(): MutableList<Image> = this.liste_pp
+    fun getListePP(): MutableList<Image> = this.liste_pp2
 
     override fun toString(): String {
-        return "$joueur1,\n$joueur2,\n$liste_pp"
+        return "$joueur1,\n$joueur2,\n$liste_pp2"
     }
 }
