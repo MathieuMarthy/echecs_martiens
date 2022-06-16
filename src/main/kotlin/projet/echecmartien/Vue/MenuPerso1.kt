@@ -76,7 +76,7 @@ public class MenuPerso1: GridPane() {
         //couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         champ_de_saisi.setMaxWidth(300.0);
         champ_de_saisi.setStyle("-fx-text-fill: white ; -fx-font-size: 25;-fx-padding: 1,1,1,1;-fx-border-color: #A149FA;-fx-border-width: 2;-fx-border-radius: 1;-fx-border: gone;-fx-background-color: #1687ab;");
-
+        champ_de_saisi.promptText = "Entrez votre Pseudo"
 
 
         right1.maxWidth = 100.0

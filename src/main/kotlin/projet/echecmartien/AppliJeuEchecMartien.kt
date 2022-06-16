@@ -2,7 +2,6 @@ package projet.echecmartien
 
 import javafx.application.Application
 import javafx.event.EventHandler
-import javafx.geometry.HPos
 import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.layout.GridPane
@@ -13,8 +12,6 @@ import javafx.stage.FileChooser
 import javafx.stage.Screen
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
-import projet.echecmartien.modele.*
-import projet.echecmartien.modele.IA
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.modele.Joueur
 
@@ -52,6 +49,9 @@ class AppliJeuEchecMartien: Application() {
         regles.addStyle()
         regles2.addStyle()
 
+        //Mise en place du plateau
+        var jeu: Jeu = Jeu()
+
         //Controleurs
 
         //NouvellePartie
@@ -68,22 +68,34 @@ class AppliJeuEchecMartien: Application() {
         nombreJoueurs.joueur2.onAction = EventHandler { primaryStage.scene.root = MenuPerso2 }
         //MenuPerso2 boutons
         MenuPerso2.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
-        MenuPerso2.boutton1.onAction = EventHandler { primaryStage.scene.root = grille }
+        MenuPerso2.boutton1.onAction = EventHandler { primaryStage.scene.root = grille ; grille.joueur1.text = MenuPerso2.champ_de_saisi.text ;grille.joueur2.text = MenuPerso2.champ_de_saisi2.text }
+
         //Grille Boutons
         grille.regles.onAction = EventHandler { primaryStage.scene.root = regles2 }
         vue.boutonRules.onAction = EventHandler { primaryStage.scene.root = regles }
+
         // Règles Bouton
         regles.boutonRetour.onAction = EventHandler { primaryStage.scene.root = vue }
         regles2.boutonRetour.onAction = EventHandler { primaryStage.scene.root = grille }
 
+        // controleur sauvegarde
+        //charger.nouveau1.onAction = ControleurSauvgarde()
+        charger.nouveau1.onAction = EventHandler { jeu.sauvegarderPartie("1") ; charger.nouveau1.text = grille.joueur1.text + " vs " + grille.joueur2.text}
+        charger.nouveau2.onAction = EventHandler { jeu.sauvegarderPartie("2") ; charger.nouveau2.text = grille.joueur1.text + " vs " + grille.joueur2.text}
+        charger.nouveau3.onAction = EventHandler { jeu.sauvegarderPartie("3") ; charger.nouveau3.text = grille.joueur1.text + " vs " + grille.joueur2.text}
+        charger.nouveau4.onAction = EventHandler { jeu.sauvegarderPartie("4") ; charger.nouveau4.text = grille.joueur1.text + " vs " + grille.joueur2.text}
+
+        // bouton "Quitter" sur la grille et fait apparaître un pop up
         var popup: Alert = Alert(Alert.AlertType.CONFIRMATION)
 
         grille.quitter.onAction = EventHandler {
-            popup.title = "Quitter la partie ?" ;
-            popup.headerText = "Voulez-vous vraiment quitter la partie ?" ;
+            popup.title = "Quitter la partie ?";
+            popup.headerText = "Voulez-vous vraiment quitter la partie ?";
             popup.contentText = "Quitter la partie vous mènera à un menu de sauvegarde. Continuer ?";
-            popup.showAndWait()
-            /*resultat.ifPresent {popup.onCloseRequest. }*/
+            val result = popup.showAndWait()
+            if (result.get() == ButtonType.OK) {
+                primaryStage.scene.root = charger
+            }
         }
 
         // switch image PP + Image PP grille
@@ -96,10 +108,6 @@ class AppliJeuEchecMartien: Application() {
 
         MenuPerso1.fileChooser.title = "Open File"
         MenuPerso1.testlabel.text = MenuPerso1.fileChooser.initialFileName
-
-
-        //Mise en place du plateau
-        var jeu: Jeu = Jeu()
 
         //Lancer partie
         MenuPerso1.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
