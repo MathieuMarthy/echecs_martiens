@@ -13,8 +13,8 @@
 }
 
 /* fond de la vue Règle*/
-.fond2 {
--fx-background-image: url("fond3.png");
+.fond3 {
+ -fx-background-image: url("fond3.png");
  -fx-background-size:150%;
  -fx-background-position: center;
  -fx-background-repeat:  no-repeat;

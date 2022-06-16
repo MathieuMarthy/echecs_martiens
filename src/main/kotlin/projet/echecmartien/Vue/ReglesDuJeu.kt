@@ -121,7 +121,7 @@ class ReglesDuJeu: VBox() {
     }
 
     fun addStyle(){
-        this.styleClass.add("fond2")
+        this.styleClass.add("fond3")
         this.styleClass.add("boutonsRegles")
         titre.styleClass.add("label")
         prepa.styleClass.add("cc")

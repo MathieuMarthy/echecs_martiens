@@ -28,6 +28,7 @@ class AppliJeuEchecMartien: Application() {
         var nombreJoueurs = NombreJoueurs()
         val MenuPerso1 = MenuPerso1()
         val MenuPerso2 = MenuPerso2()
+        val regles = ReglesDuJeu()
 
 
         //Récupération des dimensions de l'écran & mise en plein écran de la scène
@@ -46,6 +47,7 @@ class AppliJeuEchecMartien: Application() {
         grille.addStyle()
         MenuPerso1.addStyle()
         MenuPerso2.addStyle()
+        ReglesDuJeu().addStyle()
 
         //Controleurs
 
@@ -64,11 +66,14 @@ class AppliJeuEchecMartien: Application() {
         //MenuPerso2 boutons
         MenuPerso2.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
         MenuPerso2.boutton1.onAction = EventHandler{primaryStage.scene.root = grille}
+        //Grille Boutons
+        grille.regles.onAction = EventHandler{primaryStage.scene.root = regles }
+        vue.boutonRules.onAction = EventHandler{primaryStage.scene.root = regles }
+        // Règle Bouton
 
 
-        // test file chooser
 
-
+        // switch image PP
         //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
         MenuPerso1.right1.onAction = EventHandler {MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
         MenuPerso1.left1.onAction = EventHandler {MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}

@@ -64,10 +64,10 @@ public class MenuPerso1: GridPane() {
 
     init {
 
-        titre.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50.0)
+        titre.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10.0)
         pseudo1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         pseudo2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
-        labelJoueur1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
+        labelJoueur1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 5.0)
         labelJoueur2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
         champ_de_saisi.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
         photo_de_profil1.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
@@ -185,7 +185,7 @@ public class MenuPerso1: GridPane() {
         this.styleClass.add("textfield")
         this.styleClass.add("boutons4")
         this.styleClass.add("fond2")
-        this.styleClass.add("text1")
+        this.styleClass.add("cc")
 
     }
 
