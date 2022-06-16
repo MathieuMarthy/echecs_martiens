@@ -32,8 +32,8 @@ public class MenuPerso2: GridPane() {
 
     var labelJoueur1: Label = Label("Joueur 1")
     var labelJoueur2: Label = Label("Joueur 2")
-    var champ_de_saisi: TextField = TextField("Entrez votre pseudo")
-    var champ_de_saisi2: TextField = TextField("Entrez votre pseudo")
+    var champ_de_saisi: TextField = TextField("")
+    var champ_de_saisi2: TextField = TextField("")
     var photo_de_profil1: Label = Label("Photo de profil")
 
     var cercle : Circle = Circle(100.0)
@@ -82,10 +82,11 @@ public class MenuPerso2: GridPane() {
         //couleurs2.font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25.0)
         champ_de_saisi.setMaxWidth(300.0);
         champ_de_saisi.setStyle("-fx-text-fill: white ; -fx-font-size: 25;-fx-padding: 1,1,1,1;-fx-border-color: #A149FA;-fx-border-width: 2;-fx-border-radius: 1;-fx-border: gone;-fx-background-color: #1687ab;");
+        champ_de_saisi.promptText = "Entrez votre Pseudo"
 
         champ_de_saisi2.setMaxWidth(300.0);
         champ_de_saisi2.setStyle("-fx-text-fill: white ; -fx-font-size: 25;-fx-padding: 1,1,1,1;-fx-border-color: #A149FA;-fx-border-width: 2;-fx-border-radius: 1;-fx-border: gone;-fx-background-color: #1687ab;");
-
+        champ_de_saisi2.promptText = "Entrez votre Pseudo"
 
 
 
