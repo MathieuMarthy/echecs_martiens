@@ -1,10 +1,7 @@
 package projet.echecmartien.controleur
 
 import projet.echecmartien.Vue.GrilleJeu
-import projet.echecmartien.modele.Jeu
-import projet.echecmartien.modele.Joueur
-import projet.echecmartien.modele.MoyenPion
-import projet.echecmartien.modele.PetitPion
+import projet.echecmartien.modele.*
 
 class ControleurScore(grilleJeu: GrilleJeu,jeu: Jeu) {
 
@@ -14,10 +11,13 @@ class ControleurScore(grilleJeu: GrilleJeu,jeu: Jeu) {
     var joueur2 = jeu.joueurs[1]
 
     fun updateScore(){
-        println(joueur1)
         grille.nbPetitJ1 = 0
         grille.nbMoyenJ1 = 0
         grille.nbGrandJ1 = 0
+
+        grille.nbPetitJ2 = 0
+        grille.nbMoyenJ2 = 0
+        grille.nbGrandJ2 = 0
 
         // Score joueur 1
         for (pion in joueur1.getPionsCaptures()){
@@ -27,13 +27,24 @@ class ControleurScore(grilleJeu: GrilleJeu,jeu: Jeu) {
             if (pion is MoyenPion){
                 grille.nbMoyenJ1+=1
             }
-            else{
+            else if (pion is GrandPion){
                 grille.nbGrandJ1+=1
             }
         }
 
-        println(grille.nbPetitJ1)
-        println(grille.nbMoyenJ1)
-        println(grille.nbGrandJ1)
+        // Score joueur 2
+        for (pion in joueur2.getPionsCaptures()){
+            if (pion is PetitPion){
+                grille.nbPetitJ2+=1
+            }
+            if (pion is MoyenPion){
+                grille.nbMoyenJ2+=1
+            }
+            else if (pion is GrandPion){
+                grille.nbGrandJ2+=1
+            }
+        }
+
+        grille.updateScoreboard(grille.nbPetitJ1,grille.nbMoyenJ1,grille.nbGrandJ1,grille.nbPetitJ2,grille.nbMoyenJ2,grille.nbGrandJ2)
     }
 }

@@ -50,7 +50,6 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
 
         }
         this.oldPionSelected = Coordonnee(y, x)
-        ControleurScore(grille,jeu).updateScore()
     }
 
     fun colore(y: Int, x: Int) {
@@ -94,5 +93,6 @@ class ControleurCoupsPossibles(jeu: Jeu, grilleJeu : GrilleJeu): EventHandler<Mo
                 }
             }
         }
+        ControleurScore(grille,jeu).updateScore()
     }
 }
