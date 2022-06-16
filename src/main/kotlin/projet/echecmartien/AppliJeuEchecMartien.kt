@@ -82,7 +82,7 @@ class AppliJeuEchecMartien: Application() {
 
         //Lancer partie
         MenuPerso1.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
-        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,sceneMenu,primaryStage)
+        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,primaryStage)
 
 
 

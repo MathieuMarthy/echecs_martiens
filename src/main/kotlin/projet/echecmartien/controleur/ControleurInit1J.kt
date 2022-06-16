@@ -15,7 +15,7 @@ import projet.echecmartien.controleur.ControleurCoupsPossibles
 import projet.echecmartien.modele.*
 
 
-class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, scene: Scene, stage: Stage):EventHandler<ActionEvent>{
+class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, stage: Stage):EventHandler<ActionEvent>{
 
     var jeu = jeu
     var menuPerso1 = menuPerso1

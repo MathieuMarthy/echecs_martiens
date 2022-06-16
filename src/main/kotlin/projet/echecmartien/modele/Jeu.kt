@@ -185,8 +185,8 @@ public class Jeu(): InterfaceJeu {
             throw DeplacementException("Le déplacement n'est pas possible")
 
 
-        val depart = this.plateau.getCases()[coordOrigineX][coordOrigineY]
-        val arrivee = this.plateau.getCases()[coordDestinationX][coordDestinationY]
+        val depart = this.plateau.getCases()[coordOrigineY][coordOrigineX]
+        val arrivee = this.plateau.getCases()[coordDestinationY][coordDestinationX]
 
         if (arrivee.getPion() != null) {
             this.joueurCourant.ajouterPionCaptures(arrivee.getPion()!!)
