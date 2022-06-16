@@ -55,33 +55,7 @@ class GrilleJeu : BorderPane(){
     val ff = Button("Rejouer")
 
     init{
-        for (nbLignes in 0 until 8){
-            for (nbColonnes in 0 until 4){
-                val case = Rectangle(110.0,110.0)
-                case.toBack()
-                grille.add(case,nbColonnes,nbLignes)
-            }
-        }
-        //Création du damier
-        for (nbLignes in 0 until 8){
-            for (nbColonnes in 0 until 4){
-                if (nbLignes <=3){
-                    if ((nbColonnes+nbLignes)%2==1){
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }else{
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }
-                }
-                else{
-                    if ((nbColonnes+nbLignes)%2==1){
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }else{
-                        grille.children[nbLignes*4+nbColonnes].style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
-                    }
-                }
-            }
-        }
-
+        creationDamier()
         //Positionnement
         this.center = grille
         grille.alignment = Pos.CENTER
@@ -155,7 +129,29 @@ class GrilleJeu : BorderPane(){
         this.right.styleClass.add("texteGrille")
     }
 
-
+    fun creationDamier(){
+        for (nbLignes in 0 until 8){
+            for (nbColonnes in 0 until 4){
+                val case = Rectangle(110.0,110.0)
+                if (nbLignes <=3){
+                    if ((nbColonnes+nbLignes)%2==1){
+                        case.style = "-fx-fill: $couleur1; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }else{
+                        case.style = "-fx-fill: $nuance1; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }
+                }
+                else{
+                    if ((nbColonnes+nbLignes)%2==1){
+                        case.style = "-fx-fill: $couleur2; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }else{
+                        case.style = "-fx-fill: $nuance2; -fx-stroke: white; -fx-stroke-width: 2;";
+                    }
+                }
+                case.toBack()
+                grille.add(case,nbColonnes,nbLignes)
+            }
+        }
+    }
 
 
 

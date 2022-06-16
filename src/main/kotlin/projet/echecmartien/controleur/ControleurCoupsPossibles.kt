@@ -24,9 +24,6 @@ class ControleurCoupsPossibles(jeu:Jeu, grilleJeu : GrilleJeu): EventHandler<Mou
         val x = GridPane.getColumnIndex(node)
         val y = GridPane.getRowIndex(node)
 
-        //Applique le style de base à tous les
-        val caseSelected = grille.grille.children[x * 4 + y]
-
         //Remet les styles comme à l'origine
         for (i in 0 until this.listeRectangleVerts.size) {
             this.listeRectangleVerts[i].style = this.listeStyle[i]
@@ -47,17 +44,46 @@ class ControleurCoupsPossibles(jeu:Jeu, grilleJeu : GrilleJeu): EventHandler<Mou
         this.oldPionSelected = Coordonnee(x, y)
     }
 
-        fun colore(y : Int, x : Int) {
-            this.listeRectangleVerts = mutableListOf()
-            this.listeStyle = mutableListOf()
-            // Applique le style vert sur les cases possibles
-            val coups = jeu.tousLesCoupsPossibles(y, x)
-            for (valeur in coups) {
-                val casePossible = grille.grille.children[valeur.getX() * 4 + valeur.getY()]
-                this.listeRectangleVerts.add(casePossible as Rectangle)
-                this.listeStyle.add(casePossible.style)
-                casePossible.style += "-fx-fill: #339933;"
+    fun colore(y: Int, x: Int) {
+        this.listeRectangleVerts = mutableListOf()
+        this.listeStyle = mutableListOf()
+        // Applique le style vert sur les cases possibles
+        val coups = jeu.tousLesCoupsPossibles(y, x)
+        for (valeur in coups) {
+            val casePossible = grille.grille.children[valeur.getX() * 4 + valeur.getY()]
+            this.listeRectangleVerts.add(casePossible as Rectangle)
+            this.listeStyle.add(casePossible.style)
+            casePossible.style += "-fx-fill: #339933;"
+        }
+    }
+
+    fun updatePlateau() {
+        grille.grille.children.clear()
+        grille.creationDamier()
+        val plato = jeu.getPlateau().getCases()
+
+        for ((i, ligne) in plato.withIndex()) {
+            for ((j, case) in ligne.withIndex()) {
+
+                val cercle = when (case.getPion()) {
+                    is PetitPion -> Circle(30.0)
+                    is MoyenPion -> Circle(40.0)
+                    is GrandPion -> Circle(50.0)
+                    else -> Rectangle(110.0, 110.0)
+                }
+                if (cercle !is Rectangle) {
+                    cercle.onMouseClicked = this
+                    grille.grille.add(cercle, j, i)
+                    cercle.toFront()
+                    GridPane.setHalignment(cercle, HPos.CENTER)
+                } else {
+                    cercle.onMouseClicked = this
+                    cercle.style = "-fx-fill:rgba(245, 39, 145, 0);"
+                    grille.grille.add(cercle, j, i)
+                    cercle.toFront()
+                    GridPane.setHalignment(cercle, HPos.CENTER)
+                }
             }
         }
-
+    }
 }

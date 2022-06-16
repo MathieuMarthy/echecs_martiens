@@ -4,6 +4,7 @@ import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.geometry.HPos
 import javafx.scene.Scene
+import javafx.scene.control.Alert
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.StackPane
 import javafx.scene.shape.Circle
@@ -38,7 +39,7 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.isFullScreen = true
 
         //Création des scènes
-        val sceneMenu = Scene(MenuPerso1, largeur, longueur)
+        val sceneMenu = Scene(vue, largeur, longueur)
 
         //Ajout du style
         sceneMenu.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("style/style.css").toExternalForm())
@@ -90,13 +91,6 @@ class AppliJeuEchecMartien: Application() {
         MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
         MenuPerso1.left1.onAction = EventHandler { MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
 
-        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
-        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
-
-
-        MenuPerso2.right1.onAction = EventHandler { MenuPerso2.graphique.ppSuivante(); MenuPerso2.image_pp.image = MenuPerso2.graphique.getPPCourante(); grille.imagegauche.image = MenuPerso2.graphique.getPPCourante() }
-        MenuPerso2.left1.onAction = EventHandler { MenuPerso2.graphique.ppPrecedente(); MenuPerso2.image_pp.image = MenuPerso2.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso2.graphique.getPPCourante()}
-
         MenuPerso2.right2.onAction = EventHandler { MenuPerso2.graphique2.ppSuivante(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante(); grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante()}
         MenuPerso2.left2.onAction = EventHandler { MenuPerso2.graphique2.ppPrecedente(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante() ; grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante() }
 
@@ -109,8 +103,6 @@ class AppliJeuEchecMartien: Application() {
 
         //Lancer partie
         MenuPerso1.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
-        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu, MenuPerso1, grille, sceneMenu, primaryStage)
-        MenuPerso1.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
         MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,primaryStage)
 
 

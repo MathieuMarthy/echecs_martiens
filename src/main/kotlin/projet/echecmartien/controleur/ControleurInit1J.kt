@@ -26,34 +26,10 @@ class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, s
     override fun handle(p0: ActionEvent?) {
         stage.scene.root = grille
         jeu.initialiserPartie(joueur1 = Joueur(menuPerso1.champ_de_saisi.text), IA("Cortana", jeu), 5)
-
-
-
-        var plato = jeu.getPlateau().getCases()
-
-        for ((i, ligne) in plato.withIndex()) {
-            for ((j, case) in ligne.withIndex()) {
-
-                val cercle = when (case.getPion()) {
-                    is PetitPion -> Circle(30.0)
-                    is MoyenPion -> Circle(40.0)
-                    is GrandPion -> Circle(50.0)
-                    else -> Rectangle(110.0,110.0)
-                }
-                if (cercle !is Rectangle){
-                    cercle.onMouseClicked = this.controleur
-                    grille.grille.add(cercle, j, i)
-                    cercle.toFront()
-                    GridPane.setHalignment(cercle, HPos.CENTER)
-                } else{
-                    cercle.onMouseClicked = this.controleur
-                    cercle.style = "-fx-fill:rgba(245, 39, 145, 0);"
-                    grille.grille.add(cercle, j, i)
-                    cercle.toFront()
-                    GridPane.setHalignment(cercle, HPos.CENTER)
-                }
-            }
-        }
+        ControleurCoupsPossibles(this.jeu, this.grille).updatePlateau()
     }
+
+
+
 
 }

@@ -207,7 +207,7 @@ public class Jeu(): InterfaceJeu {
         }
 
         this.changeJoueurCourant()
-    }
+     }
 
     override fun joueurVainqueur(): Joueur? {
         this.statut = false
