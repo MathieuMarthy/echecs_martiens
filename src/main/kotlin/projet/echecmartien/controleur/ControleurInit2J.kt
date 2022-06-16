@@ -11,23 +11,24 @@ import javafx.scene.shape.Rectangle
 import javafx.stage.Stage
 import projet.echecmartien.Vue.GrilleJeu
 import projet.echecmartien.Vue.MenuPerso1
+import projet.echecmartien.Vue.MenuPerso2
 import projet.echecmartien.controleur.ControleurCoupsPossibles
 import projet.echecmartien.modele.*
 
 
-class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, stage: Stage):EventHandler<ActionEvent>{
+class ControleurInit2J(jeu : Jeu, menuPerso2: MenuPerso2, grilleJeu: GrilleJeu, scene: Scene, stage: Stage):EventHandler<ActionEvent>{
 
     var jeu = jeu
-    var menuPerso1 = menuPerso1
+    var menuPerso2 = menuPerso2
     var grille = grilleJeu
     var stage = stage
     var controleur = ControleurCoupsPossibles(jeu,grille)
 
     override fun handle(p0: ActionEvent?) {
-        stage.scene.root = grille
-        jeu.initialiserPartie(joueur1 = Joueur(menuPerso1.champ_de_saisi.text), IA("Cortana", jeu), 5)
 
+        jeu.initialiserPartie(joueur1 = Joueur(menuPerso2.champ_de_saisi.text), IA("Cortana", jeu), 5)
 
+        this.grille.imagedroite = this.menuPerso2.image_pp2
 
         var plato = jeu.getPlateau().getCases()
 
@@ -53,7 +54,9 @@ class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, s
                     GridPane.setHalignment(cercle, HPos.CENTER)
                 }
             }
+
         }
+        stage.scene.root = grille
     }
 
 }

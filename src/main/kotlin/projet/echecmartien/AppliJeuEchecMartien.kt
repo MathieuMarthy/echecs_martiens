@@ -24,10 +24,12 @@ class AppliJeuEchecMartien: Application() {
         //Initialisation des variables
         val vue = MainVue()
         val grille = GrilleJeu()
-        val charger =  Charger()
+        val charger = Charger()
         var nombreJoueurs = NombreJoueurs()
         val MenuPerso1 = MenuPerso1()
         val MenuPerso2 = MenuPerso2()
+        val regles = ReglesDuJeu()
+        val regles2 = ReglesDuJeu2()
 
 
         //Récupération des dimensions de l'écran & mise en plein écran de la scène
@@ -46,54 +48,75 @@ class AppliJeuEchecMartien: Application() {
         grille.addStyle()
         MenuPerso1.addStyle()
         MenuPerso2.addStyle()
+        regles.addStyle()
+        regles2.addStyle()
 
         //Controleurs
 
         //NouvellePartie
-        vue.boutonNew.onAction = EventHandler{ primaryStage.scene.root = nombreJoueurs}
+        vue.boutonNew.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
         //Retour (Nouvelle partie)
-        nombreJoueurs.retour.onAction = EventHandler{ primaryStage.scene.root = vue }
+        nombreJoueurs.retour.onAction = EventHandler { primaryStage.scene.root = vue }
 
         //ChargerPartie
-        vue.boutonLoad.onAction = EventHandler{ primaryStage.scene.root = charger }
+        vue.boutonLoad.onAction = EventHandler { primaryStage.scene.root = charger }
         //Retour (Charger partie)
-        charger.nouveau5.onAction = EventHandler{ primaryStage.scene.root = vue }
+        charger.nouveau5.onAction = EventHandler { primaryStage.scene.root = vue }
         //Nombre de joueur boutons
-        nombreJoueurs.joueur1.onAction = EventHandler{primaryStage.scene.root = MenuPerso1}
-        nombreJoueurs.joueur2.onAction = EventHandler{primaryStage.scene.root = MenuPerso2}
+        nombreJoueurs.joueur1.onAction = EventHandler { primaryStage.scene.root = MenuPerso1 }
+        nombreJoueurs.joueur2.onAction = EventHandler { primaryStage.scene.root = MenuPerso2 }
         //MenuPerso2 boutons
-        MenuPerso2.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
-        MenuPerso2.boutton1.onAction = EventHandler{primaryStage.scene.root = grille}
+        MenuPerso2.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
+        MenuPerso2.boutton1.onAction = EventHandler { primaryStage.scene.root = grille }
+        //Grille Boutons
+        grille.regles.onAction = EventHandler { primaryStage.scene.root = regles2 }
+        vue.boutonRules.onAction = EventHandler { primaryStage.scene.root = regles }
+        // Règles Bouton
+        regles.boutonRetour.onAction = EventHandler { primaryStage.scene.root = vue }
+        regles2.boutonRetour.onAction = EventHandler { primaryStage.scene.root = grille }
 
+        var popup: Alert = Alert(Alert.AlertType.CONFIRMATION)
 
-        // test file chooser
+        grille.quitter.onAction = EventHandler {
+            popup.title = "Quitter la partie ?" ;
+            popup.headerText = "Voulez-vous vraiment quitter la partie ?" ;
+            popup.contentText = "Quitter la partie vous mènera à un menu de sauvegarde. Continuer ?";
+            popup.showAndWait()
+            /*resultat.ifPresent {popup.onCloseRequest. }*/
+        }
 
-
+        // switch image PP + Image PP grille
         //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
-        MenuPerso1.right1.onAction = EventHandler {MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
-        MenuPerso1.left1.onAction = EventHandler {MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante()}
+        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+        MenuPerso1.left1.onAction = EventHandler { MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+
+        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+
+
+        MenuPerso2.right1.onAction = EventHandler { MenuPerso2.graphique.ppSuivante(); MenuPerso2.image_pp.image = MenuPerso2.graphique.getPPCourante(); grille.imagegauche.image = MenuPerso2.graphique.getPPCourante() }
+        MenuPerso2.left1.onAction = EventHandler { MenuPerso2.graphique.ppPrecedente(); MenuPerso2.image_pp.image = MenuPerso2.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso2.graphique.getPPCourante()}
+
+        MenuPerso2.right2.onAction = EventHandler { MenuPerso2.graphique2.ppSuivante(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante(); grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante()}
+        MenuPerso2.left2.onAction = EventHandler { MenuPerso2.graphique2.ppPrecedente(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante() ; grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante() }
+
         MenuPerso1.fileChooser.title = "Open File"
         MenuPerso1.testlabel.text = MenuPerso1.fileChooser.initialFileName
-
 
 
         //Mise en place du plateau
         var jeu: Jeu = Jeu()
 
         //Lancer partie
+        MenuPerso1.boutton2.onAction = EventHandler { primaryStage.scene.root = nombreJoueurs }
+        MenuPerso1.boutton1.onAction = ControleurInit1J(jeu, MenuPerso1, grille, sceneMenu, primaryStage)
         MenuPerso1.boutton2.onAction = EventHandler{primaryStage.scene.root = nombreJoueurs}
         MenuPerso1.boutton1.onAction = ControleurInit1J(jeu,MenuPerso1,grille,primaryStage)
 
 
-
-
-
-
-
-
         //Mise en place de la scène
-        primaryStage.title="Echecs Martiens"
-        primaryStage.scene=sceneMenu
+        primaryStage.title = "Echecs Martiens"
+        primaryStage.scene = sceneMenu
         primaryStage.show()
     }
 

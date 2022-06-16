@@ -12,7 +12,7 @@ import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import javafx.scene.text.Text
 
-class ReglesDuJeu: VBox() {
+class ReglesDuJeu2: VBox() {
 
     var titre: Label = Label("Règles du jeu")
     var prepa: Label = Label("Préparation")
