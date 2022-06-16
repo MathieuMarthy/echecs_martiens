@@ -21,6 +21,7 @@ class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, s
     var menuPerso1 = menuPerso1
     var grille = grilleJeu
     var stage = stage
+    var controleur = ControleurCoupsPossibles(jeu,grille)
 
     override fun handle(p0: ActionEvent?) {
         stage.scene.root = grille
