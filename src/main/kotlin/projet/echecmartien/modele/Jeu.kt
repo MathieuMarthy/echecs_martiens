@@ -11,7 +11,7 @@ public class Jeu(): InterfaceJeu {
 
     // UML
     private var plateau: Plateau = Plateau()
-    private var joueurs: MutableList<Joueur> = mutableListOf(Joueur("1"), Joueur("2"))
+    var joueurs: MutableList<Joueur> = mutableListOf(Joueur("1"), Joueur("2"))
     private var joueurCourant: Joueur = this.joueurs[0]
 
     private var coordOrigine: Coordonnee? = null

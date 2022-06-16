@@ -4,11 +4,7 @@ import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.scene.Scene
 import javafx.scene.control.Alert
-import javafx.scene.layout.GridPane
-import javafx.scene.layout.StackPane
-import javafx.scene.shape.Circle
-import javafx.scene.shape.Rectangle
-import javafx.stage.FileChooser
+import javafx.scene.control.ButtonType
 import javafx.stage.Screen
 import javafx.stage.Stage
 import projet.echecmartien.Vue.*
@@ -87,21 +83,56 @@ class AppliJeuEchecMartien: Application() {
 
         // bouton "Quitter" sur la grille et fait apparaître un pop up
         var popup: Alert = Alert(Alert.AlertType.CONFIRMATION)
-
         grille.quitter.onAction = EventHandler {
             popup.title = "Quitter la partie ?";
             popup.headerText = "Voulez-vous vraiment quitter la partie ?";
             popup.contentText = "Quitter la partie vous mènera à un menu de sauvegarde. Continuer ?";
+
+            // créé les boutons du pop up
+            var bouton_oui : ButtonType = ButtonType("Oui");
+            var bouton_non : ButtonType = ButtonType("Non");
+            var bouton_annuler : ButtonType = ButtonType("Annuler")
+            popup.getButtonTypes().setAll(bouton_oui, bouton_non, bouton_annuler);
+
+            // ce que font les boutons
             val result = popup.showAndWait()
-            if (result.get() == ButtonType.OK) {
+            if (result.get() == bouton_oui) {           // bouton menant au menu de sauvegarde
                 primaryStage.scene.root = charger
+            }else if (result.get() == bouton_non){      // bouton menant au menu principal
+                primaryStage.scene.root = vue
+            }else if (result.get() == bouton_annuler) { // bouton faisant revenir sur la grille
+                primaryStage.scene.root = grille
             }
         }
+
+        // bouton "Rejouer" sur la grille
+        grille.ff.onAction = EventHandler {
+            jeu.initialiserPartie(Joueur(jeu.joueurs[0].getPseudo()), Joueur(jeu.joueurs[1].getPseudo()), 5)
+        }
+
+        // pop up de victoire
+//        var popupVictoire: Alert = Alert(Alert.AlertType.CONFIRMATION)
+//        popupVictoire.title = "Résultats de la partie"
+//        popupVictoire.headerText = "Bravo ${jeu.joueurVainqueur()} tu es trop fort, on devrait faire une statue à votre effigie."
+//        popupVictoire.contentText = "Refaire une partie ?"
+
+//        var bouton_menu : ButtonType = ButtonType("Retour au menu")
+//        popup.getButtonTypes().setAll(bouton_menu)
+//        val resultat_victoire = popupVictoire.showAndWait()
+//        if (resultat_victoire.get() == bouton_menu){
+//            primaryStage.scene.root = vue
+//        }
 
         // switch image PP + Image PP grille
         //MenuPerso1.right1.onAction = EventHandler{MenuPerso1.fileChooser.showOpenDialog(primaryStage)}
         MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
         MenuPerso1.left1.onAction = EventHandler { MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+
+        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppSuivante(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+        MenuPerso1.right1.onAction = EventHandler { MenuPerso1.graphique.ppPrecedente(); MenuPerso1.image_pp.image = MenuPerso1.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso1.graphique.getPPCourante()}
+
+        MenuPerso2.right1.onAction = EventHandler { MenuPerso2.graphique.ppSuivante(); MenuPerso2.image_pp.image = MenuPerso2.graphique.getPPCourante(); grille.imagegauche.image = MenuPerso2.graphique.getPPCourante() }
+        MenuPerso2.left1.onAction = EventHandler { MenuPerso2.graphique.ppPrecedente(); MenuPerso2.image_pp.image = MenuPerso2.graphique.getPPCourante() ;grille.imagegauche.image = MenuPerso2.graphique.getPPCourante()}
 
         MenuPerso2.right2.onAction = EventHandler { MenuPerso2.graphique2.ppSuivante(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante(); grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante()}
         MenuPerso2.left2.onAction = EventHandler { MenuPerso2.graphique2.ppPrecedente(); MenuPerso2.image_pp2.image = MenuPerso2.graphique2.getPPCourante() ; grille.imagedroite.image = MenuPerso2.graphique2.getPPCourante() }
@@ -144,6 +175,5 @@ class AppliJeuEchecMartien: Application() {
 fun main(){
     Application.launch(AppliJeuEchecMartien::class.java)
 }
-
 
 

@@ -12,8 +12,9 @@ import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import javafx.scene.text.Text
 
-class ReglesDuJeu: VBox() {
+class ReglesDuJeu: VBox() { // règles du jeu depuis le menu (MainVue)
 
+    // variables
     var titre: Label = Label("Règles du jeu")
     var prepa: Label = Label("Préparation")
     var reglesPrepa : Text = Text("Disposez les 18 pions comme sur la figure ci-contre.\n" +
@@ -34,8 +35,10 @@ class ReglesDuJeu: VBox() {
     var reglesFin: Text = Text("Une fois la partie finie (plus de pions à capturer car ils sont tous capturés ou plus aucunes prises n'est possibles), on compte: \n" + "- 3 points par grands pions capturés,\n" + "- 2 par moyens et \n" + "- 1 par petits.\n" +
             "Le gagnant est évidemment le joueur qui à le plus de points.")
 
+    // partie basse de la vue qui est un grid pane
     val bandeauBas : GridPane = GridPane()
 
+    // les pions, les points et le bouton
     var rayonGrand: Double = 50.0
     var pionModele1 = Circle(rayonGrand)
 

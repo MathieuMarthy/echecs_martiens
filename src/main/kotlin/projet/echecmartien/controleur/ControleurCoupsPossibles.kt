@@ -1,14 +1,14 @@
 package projet.echecmartien.controleur
 
 import javafx.event.EventHandler
+import javafx.geometry.HPos
 import javafx.scene.Node
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.shape.Circle
 import javafx.scene.shape.Rectangle
 import projet.echecmartien.Vue.GrilleJeu
-import projet.echecmartien.modele.Coordonnee
-import projet.echecmartien.modele.Jeu
+import projet.echecmartien.modele.*
 
 class ControleurCoupsPossibles(jeu:Jeu, grilleJeu : GrilleJeu): EventHandler<MouseEvent> {
 
