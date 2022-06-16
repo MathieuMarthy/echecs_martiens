@@ -21,9 +21,8 @@ class ControleurInit1J(jeu : Jeu,menuPerso1: MenuPerso1, grilleJeu: GrilleJeu, s
     var menuPerso1 = menuPerso1
     var grille = grilleJeu
     var stage = stage
-    var controleur = ControleurCoupsPossibles(jeu,grille)
 
-    override fun handle(p0: ActionEvent?) {
+    override fun handle(event: ActionEvent?) {
         stage.scene.root = grille
         jeu.initialiserPartie(joueur1 = Joueur(menuPerso1.champ_de_saisi.text), IA("Cortana", jeu), 5)
         ControleurCoupsPossibles(this.jeu, this.grille).updatePlateau()

@@ -83,6 +83,7 @@ class AppliJeuEchecMartien: Application() {
 
         // bouton "Quitter" sur la grille et fait apparaître un pop up
         var popup: Alert = Alert(Alert.AlertType.CONFIRMATION)
+
         grille.quitter.onAction = EventHandler {
             popup.title = "Quitter la partie ?";
             popup.headerText = "Voulez-vous vraiment quitter la partie ?";
@@ -175,5 +176,6 @@ class AppliJeuEchecMartien: Application() {
 fun main(){
     Application.launch(AppliJeuEchecMartien::class.java)
 }
+
 
 

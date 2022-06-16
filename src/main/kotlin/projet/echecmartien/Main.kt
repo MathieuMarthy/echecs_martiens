@@ -8,7 +8,7 @@ fun main() {
     val ia = IA("salut", j)
     j.initialiserPartie(Joueur("bb"), ia, 39)
     println(j.getPlateau())
-    // j.changeJoueurCourant()
+    j.changeJoueurCourant()
     j.IAjoue()
     println(j.getPlateau())
 }

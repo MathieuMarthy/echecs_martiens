@@ -132,7 +132,7 @@ public class Jeu(): InterfaceJeu {
     }
 
     override fun deplacementPossible(coordOrigineX: Int, coordOrigineY: Int, coordDestinationX: Int, coordDestinationY: Int, joueur: Joueur?): Boolean {
-        if (coordDestinationX >= this.plateau.getTailleVerticale() || coordOrigineX >= this.plateau.getTailleVerticale() || coordDestinationY >= this.plateau.getTailleHorizontale() || coordOrigineY >= this.plateau.getTailleHorizontale())
+        if (coordDestinationX >= this.plateau.getTailleVerticale() || coordOrigineX >= this.plateau.getTailleVerticale() || coordDestinationY >= this.plateau.getTailleVerticale() || coordOrigineY >= this.plateau.getTailleHorizontale())
             throw DeplacementException("Le déplacement est en dehors des limites")
 
         if (coordDestinationX == coordOrigineX && coordDestinationY == coordOrigineY)
@@ -166,10 +166,13 @@ public class Jeu(): InterfaceJeu {
 
     fun tousLesCoupsPossibles(coordOrigineX: Int, coordOrigineY: Int): MutableList<Coordonnee> {
         val coups = mutableListOf<Coordonnee>()
+        if (this.plateau.getCases()[coordOrigineX][coordOrigineY].getPion() == null) {
+            return mutableListOf()
+        }
         for (b in 0 until this.plateau.getTailleVerticale()) {
             for (a in 0 until this.plateau.getTailleHorizontale()) {
                 try {
-                    if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurs[1])) {
+                    if (this.deplacementPossible(coordOrigineX, coordOrigineY, b, a, this.joueurCourant)) {
                         coups.add(Coordonnee(b, a))
                     }
                 } catch (_: Exception) {
@@ -181,7 +184,7 @@ public class Jeu(): InterfaceJeu {
     }
 
     override fun deplacer(coordOrigineY: Int, coordOrigineX: Int, coordDestinationY: Int, coordDestinationX: Int) {
-        if (!this.deplacementPossible(coordOrigineX, coordOrigineY, coordDestinationX, coordDestinationY, this.joueurCourant))
+        if (!this.deplacementPossible(coordOrigineY, coordOrigineX, coordDestinationY, coordDestinationX, this.joueurCourant))
             throw DeplacementException("Le déplacement n'est pas possible")
 
 
@@ -334,7 +337,8 @@ public class Jeu(): InterfaceJeu {
     fun IAjoue() {
         if (this.joueurCourant is IA) {
             val deplacement = (this.joueurCourant as IA).deplace()
-            this.deplacer(deplacement[0], deplacement[1], deplacement[2], deplacement[3])
+            this.deplacer(deplacement[1], deplacement[0], deplacement[3], deplacement[2])
+
         }
     }
 
