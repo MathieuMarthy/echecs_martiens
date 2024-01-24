@@ -24,7 +24,10 @@ class ControleurStartCharger(private var primaryStage: Stage , private var jeu: 
 
         for (i in 0 until this.jeu.sauvegardes.size) {
             val reader = FileReader(this.jeu.sauvegardes[i])
-            val json = Gson().fromJson(reader, JsonObject::class.java)
+
+            // Read the json file, if the file is empty, break the loop
+            val json = Gson().fromJson(reader, JsonObject::class.java) ?: break
+
             listeButton[i].text = json["title"].asString
             println(json["title"].asString)
         }
