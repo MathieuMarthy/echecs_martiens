@@ -1,6 +1,6 @@
 ## Echecs martiens
 
-Projet étudiant en première année, réalisé avec:  
+Projet étudiant réalisé en première année, réalisé avec:  
 [Fabeek](https://github.com/Fabeek)  
 [GodOfWoods](https://github.com/Godofwoods)  
 [Nolan Vandemeulebroucke](https://github.com/NolanVande)
